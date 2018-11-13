@@ -12,8 +12,32 @@
 
     <script src="FormGen.js"></script>
     <script type="text/javascript">
+        var ELEs = new Array();
+
+        ELEs.push(
+            new UIElement("1","text","The Label for this piece of input",true,[],true,[]));
+        ELEs.push(
+            new UIElement("2","narrative","The Label for this narrative",true,[],true,[]));
+        ELEs.push(
+            new UIElement("3","radio","Gender",true,["Male","Female","Unknown"],true,
+            [new UIInteraction("5","SHOW","Unknown")]));
+        ELEs.push(
+            new UIElement("4","dropdown","Select from the dropdown",true,["1","2","3","4"], true,[]));
+        ELEs.push(
+            new UIElement("5","date","The Label Date",true,[],true,[]));
+        ELEs.push(
+            new UIElement("6","checkbox","A bunch of check boxes",true,
+            ["Checkbox option 1","Checkbox option 2","Checkbox option 3","Checkbox option 4","Checkbox option 5"],
+            true,[]));
         
-        var FG = new FormGen('FormGenBody');
+        var FG = new FormGen('FormGenBody',ELEs);
+
+        function DoFormGenInteraction(e)
+        {
+            FG.DoFormGenInteraction(e);
+        }
+
+    
     </script>
 
 </body>
