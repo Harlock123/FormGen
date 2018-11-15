@@ -2,14 +2,24 @@ class FormGen
 {
 
     private theUIInteractions: UIInteraction[] = [];
+    private theContainer: string;
+    private theUIElements: UIElement[];
 
     constructor( DomElementID: string, UIElements: UIElement[])
     {
         // DomElementID will be the container for all the inserted form content
 
+        // save the containerID for further use elsewhere
+        this.theContainer = DomElementID;
+
+        // save the handed in UIElements for further processing later
+        this.theUIElements = UIElements;
+
+        // get the actual html element where we will put all this stuff
         var el = document.getElementById(DomElementID);
         var innerhtml = '<form> <br> ';
 
+        // iterate over all the defined elements and parse them and insert them into the dom
         for (let THEEL of UIElements)
         {
             switch (THEEL.elType.toUpperCase())
@@ -160,7 +170,7 @@ class FormGen
                             innerhtml += THEEL.elLabel + "<br>";
                     }
 
-                    innerhtml += '<select>';
+                    innerhtml += '<select id="' + THEEL.elID + '" >';
 
                     let i = 0;
                     for(let v of THEEL.elContent)
@@ -234,7 +244,269 @@ class FormGen
         innerhtml += "</form>";
 
         el.innerHTML = innerhtml;
+        
     } 
+
+    /**
+     * GetFormData
+     */
+    public GetFormData() {
+        var UIValues: UIValue[] = [];
+
+        for (let THEEL of this.theUIElements)
+        {
+            switch (THEEL.elType.toUpperCase())
+            {
+                case "TEXT":
+                {
+                    var el = <HTMLInputElement>(document.getElementById(THEEL.elID));
+
+                    var v = new UIValue(THEEL.elID,el.value);
+
+                    UIValues.push(v);
+
+                    break;
+                }
+                case "DATE":
+                {
+                    var el = <HTMLInputElement>(document.getElementById(THEEL.elID));
+
+                    var v = new UIValue(THEEL.elID,el.value);
+
+                    UIValues.push(v);
+
+                    break;
+                }
+                case "NARRATIVE":
+                {
+                    var el = <HTMLInputElement>(document.getElementById(THEEL.elID));
+
+                    var v = new UIValue(THEEL.elID,el.value);
+
+                    UIValues.push(v);
+
+                    break;
+                }
+                case "RADIO":
+                {
+                    let i=0;
+
+                    for (let vv of THEEL.elContent)
+                    {
+                        i+=1;
+
+                        var theid = THEEL.elID + "_" + i.toString();
+
+                        var el = <HTMLInputElement>(document.getElementById(theid));
+
+                        if (el.checked)
+                        {
+                            var v = new UIValue(THEEL.elID + "_" + i.toString(),"true");
+
+                            UIValues.push(v);
+                        }
+                        else
+                        {
+                            var v = new UIValue(THEEL.elID + "_" + i.toString(),"false");
+
+                            UIValues.push(v);
+                        }
+                    }
+
+                    break;
+                }
+                case "DROPDOWN":
+                {
+                    var eli = <HTMLSelectElement>(document.getElementById(THEEL.elID));
+
+                    var v = new UIValue(THEEL.elID,eli.options[eli.selectedIndex].text);
+
+                    UIValues.push(v);
+
+                    break;
+                }
+                case "CHECKBOX":
+                {
+                    let i=0;
+
+                    for (let vv of THEEL.elContent)
+                    {
+                        i+=1;
+
+                        var theid = THEEL.elID + "_" + i.toString();
+
+                        var el = <HTMLInputElement>(document.getElementById(theid));
+
+                        if (el.checked)
+                        {
+                            var v = new UIValue(THEEL.elID + "_" + i.toString(),"true");
+
+                            UIValues.push(v);
+                        }
+                        else
+                        {
+                            var v = new UIValue(THEEL.elID + "_" + i.toString(),"false");
+
+                            UIValues.push(v);
+                        }
+                    }
+
+                    break;
+                }
+            }
+        }
+        return UIValues;
+    }
+
+    /**
+     * SetFormData
+     */
+    public SetFormData(UIValues: UIValue[]) {
+        
+        for (let THEEL of this.theUIElements)
+        {
+            switch (THEEL.elType.toUpperCase())
+            {
+                case "TEXT":
+                {
+                    var el = <HTMLInputElement>(document.getElementById(THEEL.elID));
+
+                    for (let theval of UIValues)
+                    {
+                        if (theval.uivID == THEEL.elID)
+                        {
+                            el.value = theval.uivValue;
+                            this.DoFormGenInteraction(el);
+                            break;
+                        }
+                    }
+
+                    break;
+                }
+                case "DATE":
+                {
+                    var el = <HTMLInputElement>(document.getElementById(THEEL.elID));
+
+                    for (let theval of UIValues)
+                    {
+                        if (theval.uivID == THEEL.elID)
+                        {
+                            el.value = theval.uivValue;
+                            this.DoFormGenInteraction(el);
+                            break;
+                        }
+                    }
+
+                    break;
+                }
+                case "NARRATIVE":
+                {
+                    var el = <HTMLInputElement>(document.getElementById(THEEL.elID));
+
+                    for (let theval of UIValues)
+                    {
+                        if (theval.uivID == THEEL.elID)
+                        {
+                            el.value = theval.uivValue;
+                            this.DoFormGenInteraction(el);
+                            break;
+                        }
+                    }
+
+                    break;
+                }
+                case "RADIO":
+                {
+                    let i=0;
+
+                    for (let vv of THEEL.elContent)
+                    {
+                        i+=1;
+
+                        var el = <HTMLInputElement>(document.getElementById(THEEL.elID + "_" + i.toString()));
+
+                        for (let theval of UIValues)
+                        {
+                            if (theval.uivID == el.id)
+                            {
+                                if (theval.uivValue.toUpperCase() == "TRUE")
+                                {
+                                    el.checked = true;
+                                }
+                                else
+                                {
+                                    el.checked = false;
+                                }
+                                this.DoFormGenInteraction(el);
+
+                                break;
+                            }
+                        }
+                    }
+
+                    break;
+                }
+                case "DROPDOWN":
+                {
+                    var ell = <HTMLSelectElement>(document.getElementById(THEEL.elID));
+                    
+                    for (let theval of UIValues)
+                    {
+                        if (theval.uivID == THEEL.elID)
+                        {
+
+                            let i=0;
+
+                            for (let vv of THEEL.elContent)
+                            {
+                                if (theval.uivValue == vv)
+                                {
+                                    ell.selectedIndex = i;
+                                    break;
+                                }
+                                i+=1;
+                            }
+                            this.DoFormGenInteraction(ell);
+
+                            break;
+                        }
+                    }
+                    break;
+                }
+                case "CHECKBOX":
+                {
+                    let i=0;
+
+                    for (let vv of THEEL.elContent)
+                    {
+                        i+=1;
+
+                        var el = <HTMLInputElement>(document.getElementById(THEEL.elID + "_" + i.toString()));
+
+                        for (let theval of UIValues)
+                        {
+                            if (theval.uivID == el.id)
+                            {
+                                if (theval.uivValue.toUpperCase() == "TRUE")
+                                {
+                                    el.checked = true;
+                                }
+                                else
+                                {
+                                    el.checked = false;
+                                }
+                                this.DoFormGenInteraction(el);
+
+                                break;
+                            }
+                        }
+                    }
+
+                    break;
+                }
+            }
+        }
+    }
 
     /**
      * DoFormGenInteraction
@@ -302,9 +574,6 @@ class FormGen
             }
         }
 
-        var radios = document.getElementsByName('3');
-        
-
         //alert("Interacted Here current value of ");
     }
 }
@@ -349,5 +618,17 @@ class UIInteraction
         this.elIDTarget = elidtarget;
         this.elInteractionType = elinteractiontype;
         this.elValueTrigger = elvaluetrigger;
+    }
+}
+
+class UIValue
+{
+    public uivID: string;
+    public uivValue: string;
+
+    constructor(id: string, value: string)
+    {
+        this.uivID = id;
+        this.uivValue = value;
     }
 }

@@ -9,6 +9,21 @@
     <div id="FormGenBody" style="height:70vh; width: 98vw" >
         
     </div>
+    <div id="testbuttons">
+        <input type="button" onclick="alert(FG.GetFormData());" 
+                id="btnValRetrieve" value="Retrieve the values">
+
+        <input type="button" 
+                onclick="FG.SetFormData([ new UIValue('3_3','true'),
+                                          new UIValue('5','2018-11-01'),
+                                          new UIValue('6_1','true'),
+                                          new UIValue('6_3','true'),
+                                          new UIValue('7','This is a test')
+                                        ]);" 
+                                
+                id="btnValSet" value="Set Some Values">
+
+    </div>
 
     <script src="FormGen.js"></script>
     <script type="text/javascript">
