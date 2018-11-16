@@ -14,11 +14,15 @@ var FormGen = /** @class */ (function () {
             var THEEL = UIElements_1[_i];
             switch (THEEL.elType.toUpperCase()) {
                 case "TEXT": {
+                    var STY = "";
+                    if (THEEL.elStyle != "") {
+                        STY = ' style="' + THEEL.elStyle + '" ';
+                    }
                     var VIS = "";
                     if (!THEEL.elInitialVisibility) {
                         VIS = "hidden";
                     }
-                    innerhtml += '<div id="' + 'div_' + THEEL.elID + '" ' + VIS + ' >';
+                    innerhtml += '<div id="' + 'div_' + THEEL.elID + '" ' + VIS + STY + ' >';
                     if (THEEL.elLabel.trim() != "") {
                         if (THEEL.elLabelBold)
                             innerhtml += "<b>" + THEEL.elLabel + "</b><br>";
@@ -30,11 +34,15 @@ var FormGen = /** @class */ (function () {
                     break;
                 }
                 case "DATE": {
+                    var STY = "";
+                    if (THEEL.elStyle != "") {
+                        STY = ' style="' + THEEL.elStyle + '" ';
+                    }
                     var VIS = "";
                     if (!THEEL.elInitialVisibility) {
                         VIS = "hidden";
                     }
-                    innerhtml += '<div id="' + 'div_' + THEEL.elID + '" ' + VIS + ' >';
+                    innerhtml += '<div id="' + 'div_' + THEEL.elID + '" ' + VIS + STY + ' >';
                     if (THEEL.elLabel.trim() != "") {
                         if (THEEL.elLabelBold)
                             innerhtml += "<b>" + THEEL.elLabel + "</b><br>";
@@ -46,11 +54,15 @@ var FormGen = /** @class */ (function () {
                     break;
                 }
                 case "NARRATIVE": {
+                    var STY = "";
+                    if (THEEL.elStyle != "") {
+                        STY = ' style="' + THEEL.elStyle + '" ';
+                    }
                     var VIS = "";
                     if (!THEEL.elInitialVisibility) {
                         VIS = "hidden";
                     }
-                    innerhtml += '<div id="' + 'div_' + THEEL.elID + '" ' + VIS + ' >';
+                    innerhtml += '<div id="' + 'div_' + THEEL.elID + '" ' + VIS + STY + ' >';
                     if (THEEL.elLabel.trim() != "") {
                         if (THEEL.elLabelBold)
                             innerhtml += "<b>" + THEEL.elLabel + "</b><br>";
@@ -63,11 +75,15 @@ var FormGen = /** @class */ (function () {
                     break;
                 }
                 case "RADIO": {
+                    var STY = "";
+                    if (THEEL.elStyle != "") {
+                        STY = ' style="' + THEEL.elStyle + '" ';
+                    }
                     var VIS = "";
                     if (!THEEL.elInitialVisibility) {
                         VIS = "hidden";
                     }
-                    innerhtml += '<div id="' + 'div_' + THEEL.elID + '" ' + VIS + ' >';
+                    innerhtml += '<div id="' + 'div_' + THEEL.elID + '" ' + VIS + STY + ' >';
                     if (THEEL.elLabel.trim() != "") {
                         if (THEEL.elLabelBold)
                             innerhtml += "<b>" + THEEL.elLabel + "</b><br>";
@@ -99,11 +115,15 @@ var FormGen = /** @class */ (function () {
                     break;
                 }
                 case "DROPDOWN": {
+                    var STY = "";
+                    if (THEEL.elStyle != "") {
+                        STY = ' style="' + THEEL.elStyle + '" ';
+                    }
                     var VIS = "";
                     if (!THEEL.elInitialVisibility) {
                         VIS = "hidden";
                     }
-                    innerhtml += '<div id="' + 'div_' + THEEL.elID + '" ' + VIS + ' >';
+                    innerhtml += '<div id="' + 'div_' + THEEL.elID + '" ' + VIS + STY + ' >';
                     if (THEEL.elLabel.trim() != "") {
                         if (THEEL.elLabelBold)
                             innerhtml += "<b>" + THEEL.elLabel + "</b><br>";
@@ -125,11 +145,15 @@ var FormGen = /** @class */ (function () {
                     break;
                 }
                 case "CHECKBOX": {
+                    var STY = "";
+                    if (THEEL.elStyle != "") {
+                        STY = ' style="' + THEEL.elStyle + '" ';
+                    }
                     var VIS = "";
                     if (!THEEL.elInitialVisibility) {
                         VIS = "hidden";
                     }
-                    innerhtml += '<div id="' + 'div_' + THEEL.elID + '" ' + VIS + ' >';
+                    innerhtml += '<div id="' + 'div_' + THEEL.elID + '" ' + VIS + STY + ' >';
                     if (THEEL.elLabel.trim() != "") {
                         if (THEEL.elLabelBold)
                             innerhtml += "<b>" + THEEL.elLabel + "</b><br>";
@@ -190,7 +214,9 @@ var FormGen = /** @class */ (function () {
                 case "NARRATIVE":
                     {
                         var el = (document.getElementById(THEEL.elID));
-                        var v = new UIValue(THEEL.elID, el.value);
+                        var tv = el.value;
+                        //tv.replace('\\','\\\\'); // Excape NewLines and other control characters
+                        var v = new UIValue(THEEL.elID, tv);
                         UIValues.push(v);
                         break;
                     }
@@ -244,7 +270,14 @@ var FormGen = /** @class */ (function () {
         return UIValues;
     };
     /**
+     * GetFormDataAsString
+     */
+    FormGen.prototype.GetFormDataAsString = function () {
+        return JSON.stringify(this.GetFormData());
+    };
+    /**
      * SetFormData
+     *  UIValues: UIValue[]
      */
     FormGen.prototype.SetFormData = function (UIValues) {
         for (var _i = 0, _a = this.theUIElements; _i < _a.length; _i++) {
@@ -360,6 +393,14 @@ var FormGen = /** @class */ (function () {
         }
     };
     /**
+     * SetFormDataFromString
+     *  theString: string
+     */
+    FormGen.prototype.SetFormDataFromString = function (theString) {
+        var v = (JSON.parse(theString));
+        this.SetFormData(v);
+    };
+    /**
      * DoFormGenInteraction
      */
     FormGen.prototype.DoFormGenInteraction = function (e) {
@@ -407,7 +448,7 @@ var FormGen = /** @class */ (function () {
     return FormGen;
 }());
 var UIElement = /** @class */ (function () {
-    function UIElement(elid, eltype, ellabel, ellabelbold, elcontent, elrequired, elinteractions, elinitialvisibility) {
+    function UIElement(elid, eltype, ellabel, ellabelbold, elcontent, elrequired, elinteractions, elinitialvisibility, elstyle) {
         this.elID = elid;
         this.elContent = elcontent;
         this.elLabel = ellabel;
@@ -416,6 +457,7 @@ var UIElement = /** @class */ (function () {
         this.elLabelBold = ellabelbold;
         this.elInteractions = elinteractions;
         this.elInitialVisibility = elinitialvisibility;
+        this.elStyle = elstyle;
     }
     return UIElement;
 }());

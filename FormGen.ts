@@ -26,6 +26,13 @@ class FormGen
             {
                 case "TEXT": {
 
+                    var STY = "";
+
+                    if (THEEL.elStyle != "")
+                    {
+                        STY = ' style="' + THEEL.elStyle + '" ';
+                    }
+
                     var VIS = "";
 
                     if (!THEEL.elInitialVisibility)
@@ -33,7 +40,7 @@ class FormGen
                         VIS = "hidden";
                     }
 
-                    innerhtml += '<div id="' + 'div_' + THEEL.elID + '" ' + VIS + ' >';
+                    innerhtml += '<div id="' + 'div_' + THEEL.elID + '" ' + VIS + STY + ' >';
 
                     if (THEEL.elLabel.trim()!= "")
                     {
@@ -52,6 +59,13 @@ class FormGen
                 }
                 case "DATE": {
 
+                    var STY = "";
+
+                    if (THEEL.elStyle != "")
+                    {
+                        STY = ' style="' + THEEL.elStyle + '" ';
+                    }
+
                     var VIS = "";
 
                     if (!THEEL.elInitialVisibility)
@@ -59,7 +73,7 @@ class FormGen
                         VIS = "hidden";
                     }
 
-                    innerhtml += '<div id="' + 'div_' + THEEL.elID + '" ' + VIS + ' >';
+                    innerhtml += '<div id="' + 'div_' + THEEL.elID + '" ' + VIS + STY + ' >';
 
                     if (THEEL.elLabel.trim()!= "")
                     {
@@ -78,6 +92,13 @@ class FormGen
                 }
                 case "NARRATIVE": {
 
+                    var STY = "";
+
+                    if (THEEL.elStyle != "")
+                    {
+                        STY = ' style="' + THEEL.elStyle + '" ';
+                    }
+
                     var VIS = "";
 
                     if (!THEEL.elInitialVisibility)
@@ -85,7 +106,7 @@ class FormGen
                         VIS = "hidden";
                     }
 
-                    innerhtml += '<div id="' + 'div_' + THEEL.elID + '" ' + VIS + ' >';
+                    innerhtml += '<div id="' + 'div_' + THEEL.elID + '" ' + VIS + STY + ' >';
 
                     if (THEEL.elLabel.trim()!= "")
                     {
@@ -104,6 +125,13 @@ class FormGen
                 }
                 case "RADIO": {
 
+                    var STY = "";
+
+                    if (THEEL.elStyle != "")
+                    {
+                        STY = ' style="' + THEEL.elStyle + '" ';
+                    }
+
                     var VIS = "";
 
                     if (!THEEL.elInitialVisibility)
@@ -111,7 +139,7 @@ class FormGen
                         VIS = "hidden";
                     }
 
-                    innerhtml += '<div id="' + 'div_' + THEEL.elID + '" ' + VIS + ' >';
+                    innerhtml += '<div id="' + 'div_' + THEEL.elID + '" ' + VIS + STY + ' >';
 
                     if (THEEL.elLabel.trim()!= "")
                     {
@@ -153,6 +181,13 @@ class FormGen
                 }
                 case "DROPDOWN": {
 
+                    var STY = "";
+
+                    if (THEEL.elStyle != "")
+                    {
+                        STY = ' style="' + THEEL.elStyle + '" ';
+                    }
+
                     var VIS = "";
 
                     if (!THEEL.elInitialVisibility)
@@ -160,7 +195,7 @@ class FormGen
                         VIS = "hidden";
                     }
 
-                    innerhtml += '<div id="' + 'div_' + THEEL.elID + '" ' + VIS + ' >';
+                    innerhtml += '<div id="' + 'div_' + THEEL.elID + '" ' + VIS + STY + ' >';
 
                     if (THEEL.elLabel.trim()!= "")
                     {
@@ -190,6 +225,13 @@ class FormGen
                 }
                 case "CHECKBOX": {
 
+                    var STY = "";
+
+                    if (THEEL.elStyle != "")
+                    {
+                        STY = ' style="' + THEEL.elStyle + '" ';
+                    }
+
                     var VIS = "";
 
                     if (!THEEL.elInitialVisibility)
@@ -197,7 +239,7 @@ class FormGen
                         VIS = "hidden";
                     }
 
-                    innerhtml += '<div id="' + 'div_' + THEEL.elID + '" ' + VIS + ' >';
+                    innerhtml += '<div id="' + 'div_' + THEEL.elID + '" ' + VIS + STY + ' >';
 
                     if (THEEL.elLabel.trim()!= "")
                     {
@@ -281,7 +323,11 @@ class FormGen
                 {
                     var el = <HTMLInputElement>(document.getElementById(THEEL.elID));
 
-                    var v = new UIValue(THEEL.elID,el.value);
+                    var tv = el.value;
+
+                    //tv.replace('\\','\\\\'); // Excape NewLines and other control characters
+
+                    var v = new UIValue(THEEL.elID,tv);
 
                     UIValues.push(v);
 
@@ -359,7 +405,15 @@ class FormGen
     }
 
     /**
+     * GetFormDataAsString
+     */
+    public GetFormDataAsString() {
+        return JSON.stringify(this.GetFormData());
+    }
+
+    /**
      * SetFormData
+     *  UIValues: UIValue[]
      */
     public SetFormData(UIValues: UIValue[]) {
         
@@ -509,6 +563,17 @@ class FormGen
     }
 
     /**
+     * SetFormDataFromString
+     *  theString: string
+     */
+    public SetFormDataFromString(theString: string) {
+
+        var v = <UIValue[]>(JSON.parse(theString));
+        
+        this.SetFormData(v);
+    }
+
+    /**
      * DoFormGenInteraction
      */
     public DoFormGenInteraction(e) {
@@ -588,10 +653,11 @@ class UIElement
     public elRequired: boolean;
     public elInteractions: UIInteraction[];
     public elInitialVisibility: boolean;
+    public elStyle: string;
 
     constructor(elid: string, eltype: string, ellabel: string, 
         ellabelbold: boolean, elcontent: string[],elrequired: boolean,
-        elinteractions: UIInteraction[],elinitialvisibility: boolean)
+        elinteractions: UIInteraction[],elinitialvisibility: boolean, elstyle: string)
     {
         this.elID = elid;
         this.elContent = elcontent;
@@ -601,6 +667,7 @@ class UIElement
         this.elLabelBold = ellabelbold;
         this.elInteractions = elinteractions;
         this.elInitialVisibility = elinitialvisibility;
+        this.elStyle = elstyle;
 
     }
 }

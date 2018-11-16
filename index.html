@@ -10,7 +10,7 @@
         
     </div>
     <div id="testbuttons">
-        <input type="button" onclick="alert(FG.GetFormData());" 
+        <input type="button" onclick="alert(FG.GetFormDataAsString());" 
                 id="btnValRetrieve" value="Retrieve the values">
 
         <input type="button" 
@@ -23,6 +23,11 @@
                                 
                 id="btnValSet" value="Set Some Values">
 
+
+        <input type="button" 
+                onclick="PopulateFromString();" 
+                id="btnValSet1" value="Set Some Values from a String">
+
     </div>
 
     <script src="FormGen.js"></script>
@@ -30,28 +35,42 @@
         var ELEs = new Array();
 
         ELEs.push(
-            new UIElement("1","text","The Label for this piece of input",true,[],true,[],true));
+            new UIElement("1","text","The Label for this piece of input",true,[],true,[],true,""));
         ELEs.push(
-            new UIElement("2","narrative","The Label for this narrative",true,[],true,[],true));
+            new UIElement("2","narrative","The Label for this narrative",true,[],true,[],true,""));
         ELEs.push(
             new UIElement("3","radio","Gender",true,["Male","Female","Unknown"],true,
-            [new UIInteraction("3","5","SHOW","Unknown")],true));
+            [new UIInteraction("3","5","SHOW","Unknown")],true,""));
         ELEs.push(
-            new UIElement("4","dropdown","Select from the dropdown",true,["1","2","3","4"], true,[],true));
+            new UIElement("4","dropdown","Select from the dropdown",true,["1","2","3","4"], true,[],true,""));
         ELEs.push(
-            new UIElement("5","date","The Label Date",true,[],true,[],false));
+            new UIElement("5","date","The Label Date",true,[],true,[],false,""));
         ELEs.push(
             new UIElement("6","checkbox","A bunch of check boxes",true,
             ["Checkbox option 1","Checkbox option 2","Checkbox option 3","Checkbox option 4","Checkbox option 5"],
-            true,[new UIInteraction("6","7","SHOW","Checkbox option 3")],true));
+            true,[new UIInteraction("6","7","SHOW","Checkbox option 3")],true,""));
         ELEs.push(
-            new UIElement("7","narrative","Another Narrative is here",true,[],true,[],false));
+            new UIElement("7","narrative","Another Narrative is here",true,[],true,[],false,""));
         
         var FG = new FormGen('FormGenBody',ELEs);
 
         function DoFormGenInteraction(e)
         {
             FG.DoFormGenInteraction(e);
+        }
+
+        function PopulateFromString()
+        {
+            var x = '[{"uivID":"1","uivValue":"test data"},{"uivID":"2","uivValue":"sadfsadfsadf"},'+
+                 '{"uivID":"3_1","uivValue":"false"},{"uivID":"3_2","uivValue":"false"},' +
+                 '{"uivID":"3_3","uivValue":"true"},{"uivID":"4","uivValue":"3"},'+
+                 '{"uivID":"5","uivValue":"2018-11-30"},{"uivID":"6_1","uivValue":"true"},'+
+                 '{"uivID":"6_2","uivValue":"true"},{"uivID":"6_3","uivValue":"true"},'+
+                 '{"uivID":"6_4","uivValue":"false"},{"uivID":"6_5","uivValue":"false"},'+
+                 '{"uivID":"7","uivValue":"asdfsadfsadf\\nMultiLine\\nMultiLine"}]';
+
+            FG.SetFormDataFromString(x);
+
         }
 
     
