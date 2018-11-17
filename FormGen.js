@@ -188,6 +188,58 @@ var FormGen = /** @class */ (function () {
         }
         innerhtml += "</form>";
         el.innerHTML = innerhtml;
+        // Ok now all of the elements should be in the DOM
+        // now we want to iterate over everything again to set any scoring
+        for (var _l = 0, UIElements_2 = UIElements; _l < UIElements_2.length; _l++) {
+            var THEEL = UIElements_2[_l];
+            switch (THEEL.elType.toUpperCase()) {
+                case "TEXT": {
+                    var el = (document.getElementById(THEEL.elID));
+                    el.dataset.fgscore = THEEL.elScore[0].toString();
+                    break;
+                }
+                case "DATE": {
+                    var el = (document.getElementById(THEEL.elID));
+                    el.dataset.fgscore = THEEL.elScore[0].toString();
+                    break;
+                }
+                case "NARRATIVE": {
+                    var el = (document.getElementById(THEEL.elID));
+                    el.dataset.fgscore = THEEL.elScore[0].toString();
+                    break;
+                }
+                case "RADIO": {
+                    var i = 0;
+                    for (var _m = 0, _o = THEEL.elScore; _m < _o.length; _m++) {
+                        var v = _o[_m];
+                        i += 1;
+                        var el = (document.getElementById(THEEL.elID + '_' + i.toString()));
+                        el.dataset.fgscore = v.toString();
+                    }
+                    break;
+                }
+                case "DROPDOWN": {
+                    var i = 0;
+                    for (var _p = 0, _q = THEEL.elScore; _p < _q.length; _p++) {
+                        var v = _q[_p];
+                        i += 1;
+                        var ell = (document.getElementById(THEEL.elID + '_' + i.toString()));
+                        ell.dataset.fgscore = v.toString();
+                    }
+                    break;
+                }
+                case "CHECKBOX": {
+                    var i = 0;
+                    for (var _r = 0, _s = THEEL.elScore; _r < _s.length; _r++) {
+                        var v = _s[_r];
+                        i += 1;
+                        var el = (document.getElementById(THEEL.elID + '_' + i.toString()));
+                        el.dataset.fgscore = v.toString();
+                    }
+                    break;
+                }
+            }
+        }
     }
     /**
      * GetFormData
@@ -401,6 +453,92 @@ var FormGen = /** @class */ (function () {
         this.SetFormData(v);
     };
     /**
+     * GetFormScore
+     */
+    FormGen.prototype.GetFormScore = function () {
+        var score = 0;
+        for (var _i = 0, _a = this.theUIElements; _i < _a.length; _i++) {
+            var THEEL = _a[_i];
+            switch (THEEL.elType.toUpperCase()) {
+                case "TEXT":
+                    {
+                        var el = (document.getElementById(THEEL.elID));
+                        if (el.value != "") {
+                            var v = Number(el.dataset.fgscore);
+                            score += v;
+                        }
+                        break;
+                    }
+                case "DATE":
+                    {
+                        var el = (document.getElementById(THEEL.elID));
+                        if (el.value != "") {
+                            var v = Number(el.dataset.fgscore);
+                            score += v;
+                        }
+                        break;
+                    }
+                case "NARRATIVE":
+                    {
+                        var el = (document.getElementById(THEEL.elID));
+                        if (el.value != "") {
+                            var v = Number(el.dataset.fgscore);
+                            score += v;
+                        }
+                        break;
+                    }
+                case "RADIO":
+                    {
+                        var i = 0;
+                        for (var _b = 0, _c = THEEL.elContent; _b < _c.length; _b++) {
+                            var vv = _c[_b];
+                            i += 1;
+                            var theid = THEEL.elID + "_" + i.toString();
+                            var el = (document.getElementById(theid));
+                            if (el.checked) {
+                                var v = Number(el.dataset.fgscore);
+                                score += v;
+                            }
+                        }
+                        break;
+                    }
+                case "DROPDOWN":
+                    {
+                        var eli = (document.getElementById(THEEL.elID));
+                        var seltext = eli.options[eli.selectedIndex].text;
+                        var i = 0;
+                        for (var _d = 0, _e = THEEL.elContent; _d < _e.length; _d++) {
+                            var vv = _e[_d];
+                            i += 1;
+                            if (vv == seltext) {
+                                var eli1 = (document.getElementById(THEEL.elID + '_' + i.toString()));
+                                var v = Number(eli1.dataset.fgscore);
+                                score += v;
+                                break;
+                            }
+                        }
+                        break;
+                    }
+                case "CHECKBOX":
+                    {
+                        var i = 0;
+                        for (var _f = 0, _g = THEEL.elContent; _f < _g.length; _f++) {
+                            var vv = _g[_f];
+                            i += 1;
+                            var theid = THEEL.elID + "_" + i.toString();
+                            var el = (document.getElementById(theid));
+                            if (el.checked) {
+                                var v = Number(el.dataset.fgscore);
+                                score += v;
+                            }
+                        }
+                        break;
+                    }
+            }
+        }
+        return score;
+    };
+    /**
      * DoFormGenInteraction
      */
     FormGen.prototype.DoFormGenInteraction = function (e) {
@@ -448,7 +586,7 @@ var FormGen = /** @class */ (function () {
     return FormGen;
 }());
 var UIElement = /** @class */ (function () {
-    function UIElement(elid, eltype, ellabel, ellabelbold, elcontent, elrequired, elinteractions, elinitialvisibility, elstyle) {
+    function UIElement(elid, eltype, ellabel, ellabelbold, elcontent, elrequired, elinteractions, elinitialvisibility, elstyle, elscore) {
         this.elID = elid;
         this.elContent = elcontent;
         this.elLabel = ellabel;
@@ -458,6 +596,7 @@ var UIElement = /** @class */ (function () {
         this.elInteractions = elinteractions;
         this.elInitialVisibility = elinitialvisibility;
         this.elStyle = elstyle;
+        this.elScore = elscore;
     }
     return UIElement;
 }());

@@ -286,6 +286,83 @@ class FormGen
         innerhtml += "</form>";
 
         el.innerHTML = innerhtml;
+
+        // Ok now all of the elements should be in the DOM
+        // now we want to iterate over everything again to set any scoring
+        for (let THEEL of UIElements)
+        {
+            switch (THEEL.elType.toUpperCase())
+            {
+                case "TEXT": {
+
+                    var el = <HTMLElement>(document.getElementById(THEEL.elID));
+
+                    el.dataset.fgscore = THEEL.elScore[0].toString();
+
+                    break;
+                }
+                case "DATE": {
+                    var el = <HTMLElement>(document.getElementById(THEEL.elID));
+
+                    el.dataset.fgscore = THEEL.elScore[0].toString();
+
+                    break;
+
+                }
+                case "NARRATIVE": {
+                    var el = <HTMLElement>(document.getElementById(THEEL.elID));
+
+                    el.dataset.fgscore = THEEL.elScore[0].toString();
+
+                    break;
+                }
+                case "RADIO": {
+
+                    let i=0;
+                    for (let v of THEEL.elScore)
+                    {
+                        i+= 1;
+
+                        var el = <HTMLElement>(document.getElementById(THEEL.elID + '_' + i.toString())); 
+                        
+                        el.dataset.fgscore = v.toString();
+                    }
+
+                    break;
+                }
+                case "DROPDOWN": {
+
+                    let i=0;
+                    for (let v of THEEL.elScore)
+                    {
+                        i+= 1;
+
+                        var ell = <HTMLOptionElement>(document.getElementById(THEEL.elID + '_' + i.toString())); 
+                        
+                        ell.dataset.fgscore = v.toString();
+                    }
+
+                    break;
+                }
+                case "CHECKBOX": {
+
+                    let i=0;
+                    for (let v of THEEL.elScore)
+                    {
+                        i+= 1;
+
+                        var el = <HTMLElement>(document.getElementById(THEEL.elID + '_' + i.toString())); 
+                        
+                        el.dataset.fgscore = v.toString();
+                    }
+
+                    break;
+                }
+
+            }
+
+        }
+
         
     } 
 
@@ -574,6 +651,135 @@ class FormGen
     }
 
     /**
+     * GetFormScore
+     */
+    public GetFormScore() {
+        
+        var score: number = 0;
+
+        for (let THEEL of this.theUIElements)
+        {
+            switch (THEEL.elType.toUpperCase())
+            {
+                case "TEXT":
+                {
+                    var el = <HTMLInputElement>(document.getElementById(THEEL.elID));
+
+                    if (el.value != "")
+                    {
+                        var v = Number(el.dataset.fgscore);
+
+                        score += v;
+                    }
+
+                    break;
+                }
+                case "DATE":
+                {
+                    var el = <HTMLInputElement>(document.getElementById(THEEL.elID));
+
+                    if (el.value != "")
+                    {
+                        var v = Number(el.dataset.fgscore);
+
+                        score += v;
+                    }
+                    
+                    break;
+                }
+                case "NARRATIVE":
+                {
+                    var el = <HTMLInputElement>(document.getElementById(THEEL.elID));
+
+                    if (el.value != "")
+                    {
+                        var v = Number(el.dataset.fgscore);
+
+                        score += v;
+                    }
+                    
+                    break;
+                }
+                case "RADIO":
+                {
+                    let i=0;
+
+                    for (let vv of THEEL.elContent)
+                    {
+                        i+=1;
+
+                        var theid = THEEL.elID + "_" + i.toString();
+
+                        var el = <HTMLInputElement>(document.getElementById(theid));
+
+                        if (el.checked)
+                        {
+                            var v = Number(el.dataset.fgscore);
+
+                            score += v;
+                        }
+                        
+                    }
+
+                    break;
+                }
+                case "DROPDOWN":
+                {
+                    var eli = <HTMLSelectElement>(document.getElementById(THEEL.elID));
+
+                    var seltext = eli.options[eli.selectedIndex].text;
+
+                    let i =0;
+
+                    for (let vv of THEEL.elContent )
+                    {
+                        i += 1;
+
+                        if (vv == seltext)
+                        {
+                            var eli1 = <HTMLOptionElement>(document.getElementById(THEEL.elID + '_' + i.toString()));
+                            
+                            var v = Number(eli1.dataset.fgscore);
+
+                            score += v;
+
+                            break;
+
+                        }
+                    }
+                    
+                    break;
+                }
+                case "CHECKBOX":
+                {
+                    let i=0;
+
+                    for (let vv of THEEL.elContent)
+                    {
+                        i+=1;
+
+                        var theid = THEEL.elID + "_" + i.toString();
+
+                        var el = <HTMLInputElement>(document.getElementById(theid));
+
+                        if (el.checked)
+                        {
+                            var v = Number(el.dataset.fgscore);
+
+                            score += v;
+                        }
+                        
+                    }
+
+                    break;
+                }
+            }
+        }
+
+        return score;
+    }
+
+    /**
      * DoFormGenInteraction
      */
     public DoFormGenInteraction(e) {
@@ -654,10 +860,12 @@ class UIElement
     public elInteractions: UIInteraction[];
     public elInitialVisibility: boolean;
     public elStyle: string;
+    public elScore: number[];
 
     constructor(elid: string, eltype: string, ellabel: string, 
         ellabelbold: boolean, elcontent: string[],elrequired: boolean,
-        elinteractions: UIInteraction[],elinitialvisibility: boolean, elstyle: string)
+        elinteractions: UIInteraction[],elinitialvisibility: boolean, elstyle: string,
+        elscore: number[])
     {
         this.elID = elid;
         this.elContent = elcontent;
@@ -668,6 +876,7 @@ class UIElement
         this.elInteractions = elinteractions;
         this.elInitialVisibility = elinitialvisibility;
         this.elStyle = elstyle;
+        this.elScore = elscore;
 
     }
 }
