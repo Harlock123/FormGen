@@ -3,6 +3,7 @@ Typescript Library to Use Data structures handed to it to interpret and create U
 
 Takes a simple ARRAY of elements in the form of UIElement and the name of the container object in which to place the results.
 
+```
 class UIElement
 {
     public elID: string;
@@ -31,3 +32,4 @@ class UIElement
 
     }
 }
+```
