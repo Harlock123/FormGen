@@ -15,10 +15,12 @@ class UIElement
     public elInteractions: UIInteraction[];
     public elInitialVisibility: boolean;
     public elStyle: string;
+    public elScore: number;
 
     constructor(elid: string, eltype: string, ellabel: string, 
         ellabelbold: boolean, elcontent: string[],elrequired: boolean,
-        elinteractions: UIInteraction[],elinitialvisibility: boolean, elstyle: string)
+        elinteractions: UIInteraction[],elinitialvisibility: boolean, elstyle: string,
+        elscore: number)
     {
         this.elID = elid;
         this.elContent = elcontent;
@@ -29,6 +31,7 @@ class UIElement
         this.elInteractions = elinteractions;
         this.elInitialVisibility = elinitialvisibility;
         this.elStyle = elstyle;
+        this.elScore = elscore;
 
     }
 }
