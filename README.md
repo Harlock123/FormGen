@@ -3,7 +3,7 @@ Typescript Library to Use Data structures handed to it to interpret and create U
 
 Takes a simple ARRAY of elements in the form of UIElement and the name of the container object in which to place the results.
 
-```
+```typescript
 class UIElement
 {
     public elID: string;
@@ -64,7 +64,7 @@ Some Details:
 
 - elscore is an array of numbers used to associate a weight numerically with each element as its inserted into the page. Used by the GetFormScore method to return a  value if an associated element is populated or selected. So if you have a radiobutton list or checkboxlist or dropdown list, you will have a weight for subelement. Text, Dates and Narrative will have a singular value in this array.
 
-```
+```typescript
 class UIInteraction
 {
     public elIDSource: string;
