@@ -3,7 +3,7 @@ Typescript Library to Use Data structures handed to it to interpret and create U
 
 Takes a simple ARRAY of elements in the form of UIElement and the name of the container object in which to place the results.
 
-##UIElement definition
+## UIElement definition
 
 ```typescript
 class UIElement
@@ -39,7 +39,7 @@ class UIElement
 }
 ```
 
-###Some Details:
+### Some Details:
 - **elid** is a simple string that will be used to identify the element on the DOM. It can be any alpha numeric be unique for each elemet that is being placed into the form.
 
 - **eltype** is a string representation of the kind of ui element desired. Valid types are
@@ -66,7 +66,7 @@ class UIElement
 
 - **elscore** is an array of numbers used to associate a weight numerically with each element as its inserted into the page. Used by the GetFormScore method to return a  value if an associated element is populated or selected. So if you have a radiobutton list or checkboxlist or dropdown list, you will have a weight for subelement. Text, Dates and Narrative will have a singular value in this array.
 
-#UIInteraction definition
+## UIInteraction definition
 
 ```typescript
 class UIInteraction
@@ -85,7 +85,7 @@ class UIInteraction
     }
 }
 ```
-###Some Details:
+### Some Details:
 - **elidsource** this represents the identifier for the element that will trigger the interaction. This is usually the elid of the element this is contained within but does not necessarily need to be. IE you can include a UIInteraction in an element that is not part of the UIInteraction chain.
 
 - **elidtarget** this represents the identifier for the element that interacted with.
@@ -98,7 +98,7 @@ class UIInteraction
 
 - **elvaluetrigger** This represented the associated value that will do the triggering. For a selection list like RADIO BUTTONS, CHECKBOXES, and DROPDOWN LISTS this represented the specific item in those lists that will be doing the triggering. TEXT and NARRATIVES are simple BLANK or NOT triggers, DATES are anything entered or blank triggers
 
-###SAMPLE HTML
+### SAMPLE HTML
 
 ```html
 <!DOCTYPE html>
