@@ -93,10 +93,10 @@ class UIInteraction
 - **elinteractiontype** this represented the kind of interaction that will be performed valid types are
     - SHOW  will show based on trigger
     - HIDE  will hide based on trigger
-    - REQUIRED will trigger a required status on target based on trigger
-    - NOTREQUIRED will clear a required status on target based on trigger
+    - REQUIRED will trigger a required status on target based on trigger TODO:
+    - NOTREQUIRED will clear a required status on target based on trigger TODO:
 
-- **elvaluetrigger** This represented the associated value that will do the triggering. For a selection list like RADIO BUTTONS, CHECKBOXES, and DROPDOWN LISTS this represented the specific item in those lists that will be doing the triggering. TEXT and NARRATIVES are simple BLANK or NOT triggers, DATES are anything entered or blank triggers
+- **elvaluetrigger** This represented the associated value that will do the triggering. For a selection list like RADIO BUTTONS, CHECKBOXES, and DROPDOWN LISTS this represented the specific item in those lists that will be doing the triggering. TEXT and NARRATIVES convert entered values to UPPERCASE and perform comparsions against the valuetrigger alsoconverted to uppercase, DATES are anything entered or blank triggers
 
 ### METHODS
 
