@@ -199,23 +199,41 @@ var FormGen = /** @class */ (function () {
         innerhtml += "</form>";
         el.innerHTML = innerhtml;
         // Ok now all of the elements should be in the DOM
-        // now we want to iterate over everything again to set any scoring
+        // now we want to iterate over everything again to set any scoring and any required bits
         for (var _o = 0, UIElements_2 = UIElements; _o < UIElements_2.length; _o++) {
             var THEEL = UIElements_2[_o];
             switch (THEEL.elType.toUpperCase()) {
                 case "TEXT": {
                     var el = (document.getElementById(THEEL.elID));
                     el.dataset.fgscore = THEEL.elScore[0].toString();
+                    if (THEEL.elRequired) {
+                        el.dataset.fgrequired = "YES";
+                    }
+                    else {
+                        el.dataset.fgrequired = "NO";
+                    }
                     break;
                 }
                 case "DATE": {
                     var el = (document.getElementById(THEEL.elID));
                     el.dataset.fgscore = THEEL.elScore[0].toString();
+                    if (THEEL.elRequired) {
+                        el.dataset.fgrequired = "YES";
+                    }
+                    else {
+                        el.dataset.fgrequired = "NO";
+                    }
                     break;
                 }
                 case "NARRATIVE": {
                     var el = (document.getElementById(THEEL.elID));
                     el.dataset.fgscore = THEEL.elScore[0].toString();
+                    if (THEEL.elRequired) {
+                        el.dataset.fgrequired = "YES";
+                    }
+                    else {
+                        el.dataset.fgrequired = "NO";
+                    }
                     break;
                 }
                 case "RADIO": {
@@ -225,6 +243,12 @@ var FormGen = /** @class */ (function () {
                         i += 1;
                         var el = (document.getElementById(THEEL.elID + '_' + i.toString()));
                         el.dataset.fgscore = v.toString();
+                        if (THEEL.elRequired) {
+                            el.dataset.fgrequired = "YES";
+                        }
+                        else {
+                            el.dataset.fgrequired = "NO";
+                        }
                     }
                     break;
                 }
@@ -235,6 +259,12 @@ var FormGen = /** @class */ (function () {
                         i += 1;
                         var ell = (document.getElementById(THEEL.elID + '_' + i.toString()));
                         ell.dataset.fgscore = v.toString();
+                        if (THEEL.elRequired) {
+                            ell.dataset.fgrequired = "YES";
+                        }
+                        else {
+                            ell.dataset.fgrequired = "NO";
+                        }
                     }
                     break;
                 }
@@ -245,6 +275,12 @@ var FormGen = /** @class */ (function () {
                         i += 1;
                         var el = (document.getElementById(THEEL.elID + '_' + i.toString()));
                         el.dataset.fgscore = v.toString();
+                        if (THEEL.elRequired) {
+                            el.dataset.fgrequired = "YES";
+                        }
+                        else {
+                            el.dataset.fgrequired = "NO";
+                        }
                     }
                     break;
                 }
@@ -547,6 +583,105 @@ var FormGen = /** @class */ (function () {
             }
         }
         return score;
+    };
+    /**
+     * IsFormValid
+     */
+    FormGen.prototype.IsFormValid = function () {
+        var isvalid = true;
+        for (var _i = 0, _a = this.theUIElements; _i < _a.length; _i++) {
+            var THEEL = _a[_i];
+            if (THEEL.elRequired) {
+                switch (THEEL.elType.toUpperCase()) {
+                    case "TEXT":
+                        {
+                            var del = (document.getElementById("div_" + THEEL.elID));
+                            if (!del.hidden) {
+                                var el = (document.getElementById(THEEL.elID));
+                                if (el.value + "" == "") {
+                                    isvalid = false;
+                                }
+                            }
+                            break;
+                        }
+                    case "DATE":
+                        {
+                            var del = (document.getElementById("div_" + THEEL.elID));
+                            if (!del.hidden) {
+                                var el = (document.getElementById(THEEL.elID));
+                                if (el.value + "" == "") {
+                                    isvalid = false;
+                                }
+                            }
+                            break;
+                        }
+                    case "NARRATIVE":
+                        {
+                            var del = (document.getElementById("div_" + THEEL.elID));
+                            if (!del.hidden) {
+                                var el = (document.getElementById(THEEL.elID));
+                                if (el.value + "" == "") {
+                                    isvalid = false;
+                                }
+                            }
+                            break;
+                        }
+                    case "RADIO":
+                        {
+                            var del = (document.getElementById("div_" + THEEL.elID));
+                            if (!del.hidden) {
+                                var i = 0;
+                                var newvalid = false;
+                                for (var _b = 0, _c = THEEL.elContent; _b < _c.length; _b++) {
+                                    var vv = _c[_b];
+                                    i += 1;
+                                    var theid = THEEL.elID + "_" + i.toString();
+                                    var el = (document.getElementById(theid));
+                                    if (el.checked) {
+                                        newvalid = true;
+                                    }
+                                }
+                                if (isvalid && !newvalid)
+                                    isvalid = newvalid;
+                            }
+                            break;
+                        }
+                    case "DROPDOWN":
+                        {
+                            var del = (document.getElementById("div_" + THEEL.elID));
+                            if (!del.hidden) {
+                                var eli = (document.getElementById(THEEL.elID));
+                                var seltext = eli.options[eli.selectedIndex].text;
+                                if (seltext + "" == "") {
+                                    isvalid = false;
+                                }
+                            }
+                            break;
+                        }
+                    case "CHECKBOX":
+                        {
+                            var del = (document.getElementById("div_" + THEEL.elID));
+                            if (!del.hidden) {
+                                var i = 0;
+                                var newvalid = false;
+                                for (var _d = 0, _e = THEEL.elContent; _d < _e.length; _d++) {
+                                    var vv = _e[_d];
+                                    i += 1;
+                                    var theid = THEEL.elID + "_" + i.toString();
+                                    var el = (document.getElementById(theid));
+                                    if (el.checked) {
+                                        newvalid = true;
+                                    }
+                                }
+                                if (isvalid && !newvalid)
+                                    isvalid = newvalid;
+                            }
+                            break;
+                        }
+                }
+            }
+        }
+        return isvalid;
     };
     /**
      * DoFormGenInteraction

@@ -301,7 +301,7 @@ class FormGen
         el.innerHTML = innerhtml;
 
         // Ok now all of the elements should be in the DOM
-        // now we want to iterate over everything again to set any scoring
+        // now we want to iterate over everything again to set any scoring and any required bits
         for (let THEEL of UIElements)
         {
             switch (THEEL.elType.toUpperCase())
@@ -312,12 +312,30 @@ class FormGen
 
                     el.dataset.fgscore = THEEL.elScore[0].toString();
 
+                    if (THEEL.elRequired)
+                    {
+                        el.dataset.fgrequired = "YES";
+                    }
+                    else
+                    {
+                        el.dataset.fgrequired = "NO";
+                    }
+
                     break;
                 }
                 case "DATE": {
                     var el = <HTMLElement>(document.getElementById(THEEL.elID));
 
                     el.dataset.fgscore = THEEL.elScore[0].toString();
+
+                    if (THEEL.elRequired)
+                    {
+                        el.dataset.fgrequired = "YES";
+                    }
+                    else
+                    {
+                        el.dataset.fgrequired = "NO";
+                    }
 
                     break;
 
@@ -326,6 +344,15 @@ class FormGen
                     var el = <HTMLElement>(document.getElementById(THEEL.elID));
 
                     el.dataset.fgscore = THEEL.elScore[0].toString();
+
+                    if (THEEL.elRequired)
+                    {
+                        el.dataset.fgrequired = "YES";
+                    }
+                    else
+                    {
+                        el.dataset.fgrequired = "NO";
+                    }
 
                     break;
                 }
@@ -339,6 +366,15 @@ class FormGen
                         var el = <HTMLElement>(document.getElementById(THEEL.elID + '_' + i.toString())); 
                         
                         el.dataset.fgscore = v.toString();
+
+                        if (THEEL.elRequired)
+                        {
+                            el.dataset.fgrequired = "YES";
+                        }
+                        else
+                        {
+                            el.dataset.fgrequired = "NO";
+                        }
                     }
 
                     break;
@@ -353,6 +389,15 @@ class FormGen
                         var ell = <HTMLOptionElement>(document.getElementById(THEEL.elID + '_' + i.toString())); 
                         
                         ell.dataset.fgscore = v.toString();
+
+                        if (THEEL.elRequired)
+                        {
+                            ell.dataset.fgrequired = "YES";
+                        }
+                        else
+                        {
+                            ell.dataset.fgrequired = "NO";
+                        }
                     }
 
                     break;
@@ -367,6 +412,15 @@ class FormGen
                         var el = <HTMLElement>(document.getElementById(THEEL.elID + '_' + i.toString())); 
                         
                         el.dataset.fgscore = v.toString();
+
+                        if (THEEL.elRequired)
+                        {
+                            el.dataset.fgrequired = "YES";
+                        }
+                        else
+                        {
+                            el.dataset.fgrequired = "NO";
+                        }
                     }
 
                     break;
@@ -790,6 +844,153 @@ class FormGen
         }
 
         return score;
+    }
+
+    /**
+     * IsFormValid
+     */
+    public IsFormValid() {
+
+        var isvalid: boolean = true;
+        
+        for (let THEEL of this.theUIElements)
+        {
+            if(THEEL.elRequired)
+            {
+            switch (THEEL.elType.toUpperCase())
+            {
+                case "TEXT":
+                {
+                    var del = <HTMLElement>(document.getElementById("div_" + THEEL.elID));
+
+                    if (!del.hidden) {
+
+                    var el = <HTMLInputElement>(document.getElementById(THEEL.elID));
+
+                    if (el.value + "" == "")
+                    {
+                       isvalid = false;
+                    }
+                    }
+
+                    break;
+                }
+                case "DATE":
+                {
+                    var del = <HTMLElement>(document.getElementById("div_" + THEEL.elID));
+
+                    if (!del.hidden) {
+
+                    var el = <HTMLInputElement>(document.getElementById(THEEL.elID));
+
+                    if (el.value + "" == "")
+                    {
+                       isvalid = false;
+                    }
+                    }
+                    
+                    break;
+                }
+                case "NARRATIVE":
+                {
+                    var del = <HTMLElement>(document.getElementById("div_" + THEEL.elID));
+
+                    if (!del.hidden) {
+
+                    var el = <HTMLInputElement>(document.getElementById(THEEL.elID));
+
+                    if (el.value + "" == "")
+                    {
+                       isvalid = false;
+                    }
+                    }
+
+                    break;
+                }
+                case "RADIO":
+                {
+                    var del = <HTMLElement>(document.getElementById("div_" + THEEL.elID));
+
+                    if (!del.hidden) {
+
+                    let i=0;
+
+                    let newvalid = false;
+
+                    for (let vv of THEEL.elContent)
+                    {
+                        i+=1;
+
+                        var theid = THEEL.elID + "_" + i.toString();
+
+                        var el = <HTMLInputElement>(document.getElementById(theid));
+
+                        if (el.checked)
+                        {
+                            newvalid = true;
+                        }
+                        
+                    }
+
+                    if (isvalid && !newvalid)
+                        isvalid = newvalid;
+                    }
+                    break;
+                }
+                case "DROPDOWN":
+                {
+                    var del = <HTMLElement>(document.getElementById("div_" + THEEL.elID));
+
+                    if (!del.hidden) {
+
+                    var eli = <HTMLSelectElement>(document.getElementById(THEEL.elID));
+
+                    var seltext = eli.options[eli.selectedIndex].text;
+
+                    if (seltext+"" == "")
+                    {
+                        isvalid = false;
+                    }
+                    }
+                    
+                    break;
+                }
+                case "CHECKBOX":
+                {
+                    var del = <HTMLElement>(document.getElementById("div_" + THEEL.elID));
+
+                    if (!del.hidden) {
+
+                    let i=0;
+
+                    let newvalid = false;
+
+                    for (let vv of THEEL.elContent)
+                    {
+                        i+=1;
+
+                        var theid = THEEL.elID + "_" + i.toString();
+
+                        var el = <HTMLInputElement>(document.getElementById(theid));
+
+                        if (el.checked)
+                        {
+                            newvalid = true;
+                        }
+                        
+                    }
+
+                    if (isvalid && !newvalid)
+                        isvalid = newvalid;
+                    }
+                    break;
+                }
+            }
+            }
+        }
+
+
+        return isvalid;
     }
 
     /**
