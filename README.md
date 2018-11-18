@@ -101,7 +101,7 @@ class UIInteraction
 ### METHODS
 
 - **GetFormData()** Returns an array of UIValues
-    - ```typescript
+```typescript
     class UIValue
     {
         public uivID: string;
@@ -113,9 +113,30 @@ class UIInteraction
             this.uivValue = value;
         }
     }
+```
+    - These UIValues willenumerate all of the forms elements and carry their current entries.
+    
+- **GetFormDataAsString()** Essentially returns JSON.Stringify() of the **GetFormData()** method above.
 
-    ```
+- **SetFormData(UIValues: UIValue[])** Takes an array of UIValues and populates the form.
 
+- **SetFormDataFromString(theString: string)** Does a JSON.Parse() on theString and calls the above Method to populatethe form from a string of values.
+
+- **GetFormScore()** Will return a number of the sum of all the entered fields on the form that have associated weights assigned. Used to apply a simple score to a collection of entered form fields for various business logic assertions.
+
+- **IsFormValid()** Returns a simple TRUE or FALSE if all of the elements that have the **elrequired** flag set in their definition. TEXT, DATES, NARRATIVES are all based on blank/empty or something in them. Checkboxes and RadioButtons and Dropdowns are all if something is selected in them.
+
+- **DoFormInteraction(e)** a public internal method that should be wired to a base javascript function outside of the class of the same name that calls the internal method with the same signature.
+IE 
+If the class is dfined as FG then
+
+        function DoFormGenInteraction(e)
+        {
+            FG.DoFormGenInteraction(e);
+        }
+ be somewhere in the base javascript to wire up the UIInteractions..
+ TODO: find a cleaner way to do this
+ 
 
 ### SAMPLE HTML
 
