@@ -44,7 +44,8 @@
         var ELEs = new Array();
 
         ELEs.push(
-            new UIElement("1","text","The Label for this piece of input",true,[],true,[],true,"",[0]));
+            new UIElement("1","text","The Label for this piece of input",true,[],true,
+            [new UIInteraction("1","8","SHOW","N/A")],true,"",[0]));
         ELEs.push(
             new UIElement("2","narrative","The Label for this narrative",true,[],true,[],true,"",[1]));
         ELEs.push(
@@ -67,12 +68,16 @@
         
         var FG = new FormGen('FormGenBody',ELEs);
 
+        /// This is a stub routine to wire up the UIInteractions
+        /// as I dont know how to have the class call into itself via the ONCLICK and ONCHANGE
+        /// manufactured handlers in the inserted DOM elements
+        /// Need to find a cleaner way to do this
         function DoFormGenInteraction(e)
         {
             FG.DoFormGenInteraction(e);
         }
 
-        function PopulateFromString()
+        function PopulateFromString() /// assumes the class is instanced as FG
         {
             var x = '[{"uivID":"1","uivValue":"test data"},{"uivID":"2","uivValue":"sadfsadfsadf"},'+
                  '{"uivID":"3_1","uivValue":"false"},{"uivID":"3_2","uivValue":"false"},' +
@@ -80,7 +85,9 @@
                  '{"uivID":"5","uivValue":"2018-11-30"},{"uivID":"6_1","uivValue":"true"},'+
                  '{"uivID":"6_2","uivValue":"true"},{"uivID":"6_3","uivValue":"true"},'+
                  '{"uivID":"6_4","uivValue":"false"},{"uivID":"6_5","uivValue":"true"},'+
-                 '{"uivID":"7","uivValue":"asdfsadfsadf\\nMultiLine\\nMultiLine"}]';
+                 '{"uivID":"7","uivValue":"asdfsadfsadf\\nMultiLine\\nMultiLine"}]' +
+                 '{"uivID":"8","uivValue":"Some More Text Inserted into a Narrative\\nMultiLine\\nMultiLine"}]';
+                 
 
             FG.SetFormDataFromString(x);
 

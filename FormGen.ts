@@ -50,7 +50,23 @@ class FormGen
                         else
                             innerhtml += THEEL.elLabel + "<br>";
                     }
-                    innerhtml += '<input type="text" name = "' + THEEL.elID +'" id="' + THEEL.elID + '" ><br> ';
+
+                    if (!Array.isArray(THEEL.elInteractions) || !THEEL.elInteractions.length )
+                    {
+                        innerhtml += '<input type="text" name = "' + THEEL.elID + 
+                            '" id="' + THEEL.elID + '" ><br> ';
+                    }
+                    else
+                    {
+                        for (let v of THEEL.elInteractions)
+                        {
+                            this.theUIInteractions.push(v);
+                        }
+
+                        innerhtml += '<input type="text" name = "' + THEEL.elID + 
+                        '" id="' + THEEL.elID + '" onchange="DoFormGenInteraction(this)" ><br> ';
+                    
+                    }
 
                     innerhtml += '</div> ';
 
@@ -1095,6 +1111,48 @@ class FormGen
                                 }
                             }
 
+                        }
+                    }
+                    else
+                    {
+                        if (e.type.toUpperCase() == "TEXT")
+                        {
+                            // do something here
+
+                            var v = e.value.toUpperCase();
+
+                            var thetriggeredelement = document.getElementById("div_" + UIi.elIDTarget);
+
+                            if (v == UIi.elValueTrigger.toUpperCase() )
+                            {
+                            
+                                if (UIi.elInteractionType=="SHOW")
+                                {
+                                    thetriggeredelement.style.display = "block";
+                                }
+                                else
+                                {
+                                    if (UIi.elInteractionType=="HIDE")
+                                    {
+                                        thetriggeredelement.style.display = "none";
+                                    }
+                                }
+
+                            }
+                            else
+                            {   
+                                if (UIi.elInteractionType=="SHOW")
+                                {
+                                    thetriggeredelement.style.display = "none";
+                                }
+                                else
+                                {
+                                    if (UIi.elInteractionType=="HIDE")
+                                    {
+                                        thetriggeredelement.style.display = "block";
+                                    }
+                                }
+                            }
                         }
                     }
                 }
