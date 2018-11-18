@@ -114,7 +114,7 @@ class UIInteraction
         }
     }
 ```
-    - These UIValues willenumerate all of the forms elements and carry their current entries.
+    These UIValues willenumerate all of the forms elements and carry their current entries.
     
 - **GetFormDataAsString()** Essentially returns JSON.Stringify() of the **GetFormData()** method above.
 
