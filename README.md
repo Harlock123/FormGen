@@ -96,11 +96,12 @@ class UIInteraction
     - REQUIRED will trigger a required status on target based on trigger TODO:
     - NOTREQUIRED will clear a required status on target based on trigger TODO:
 
-- **elvaluetrigger** This represented the associated value that will do the triggering. For a selection list like RADIO BUTTONS, CHECKBOXES, and DROPDOWN LISTS this represented the specific item in those lists that will be doing the triggering. TEXT and NARRATIVES convert entered values to UPPERCASE and perform comparsions against the valuetrigger alsoconverted to uppercase, DATES are anything entered or blank triggers
+- **elvaluetrigger** This represented the associated value that will do the triggering. For a selection list like RADIO BUTTONS, CHECKBOXES, and DROPDOWN LISTS this represented the specific item in those lists that will be doing the triggering. TEXT and NARRATIVES convert entered values to UPPERCASE and perform comparsions against the valuetrigger also converted to uppercase, DATES are anything entered or blank triggers
 
 ### METHODS
 
-- **GetFormData()** Returns an array of UIValues
+- **GetFormData()** Returns an array of UIValues. These UIValues will enumerate all of the forms elements and carry their current entries. UIValue definition shown below...
+
 ```typescript
     class UIValue
     {
@@ -114,11 +115,10 @@ class UIInteraction
         }
     }
 ```
-    These UIValues willenumerate all of the forms elements and carry their current entries.
-    
+        
 - **GetFormDataAsString()** Essentially returns JSON.Stringify() of the **GetFormData()** method above.
 
-- **SetFormData(UIValues: UIValue[])** Takes an array of UIValues and populates the form.
+- **SetFormData(UIValues: UIValue[])** Takes an array of UIValues and populates the form. (see **GetFormdata()** above for the definition of the UIValue class )
 
 - **SetFormDataFromString(theString: string)** Does a JSON.Parse() on theString and calls the above Method to populatethe form from a string of values.
 
