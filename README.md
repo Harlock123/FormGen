@@ -98,6 +98,25 @@ class UIInteraction
 
 - **elvaluetrigger** This represented the associated value that will do the triggering. For a selection list like RADIO BUTTONS, CHECKBOXES, and DROPDOWN LISTS this represented the specific item in those lists that will be doing the triggering. TEXT and NARRATIVES are simple BLANK or NOT triggers, DATES are anything entered or blank triggers
 
+### METHODS
+
+- **GetFormData()** Returns an array of UIValues
+    - ```typescript
+    class UIValue
+    {
+        public uivID: string;
+        public uivValue: string;
+
+        constructor(id: string, value: string)
+        {
+            this.uivID = id;
+            this.uivValue = value;
+        }
+    }
+
+    ```
+
+
 ### SAMPLE HTML
 
 ```html
