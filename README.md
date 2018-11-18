@@ -128,7 +128,7 @@ class UIInteraction
 
 - **DoFormInteraction(e)** a public internal method that should be wired to a base javascript function outside of the class of the same name that calls the internal method with the same signature.
 IE 
-If the class is dfined as FG then
+If the class is defined as FG then
 
         function DoFormGenInteraction(e)
         {
