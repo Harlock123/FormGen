@@ -190,7 +190,8 @@ If the class is defined as FG then
             new UIElement("1","text","The Label for this piece of input",true,[],true,
             [new UIInteraction("1","8","SHOW","N/A")],true,"",[0]));
         ELEs.push(
-            new UIElement("2","narrative","The Label for this narrative",true,[],true,[],true,"",[1]));
+            new UIElement("2","narrative","The Label for this narrative",true,[],true,
+            [new UIInteraction("2","8","SHOW","SAMPLE TRIGGER")],true,"",[1]));
         ELEs.push(
             new UIElement("3","radio","Gender",true,["Male","Female","Unknown"],true,
             [new UIInteraction("3","5","SHOW","Unknown")],true,"",[2,3,4]));
@@ -198,7 +199,11 @@ If the class is defined as FG then
             new UIElement("4","dropdown","Select from the dropdown",true,["unset","1","2","3","4"], true,
             [new UIInteraction("4","8","HIDE","unset")],true,"",[0,5,6,7,8]));
         ELEs.push(
-            new UIElement("5","date","The Label Date",true,[],true,[],false,"",[9]));
+            new UIElement("5","date","The Label Date",true,[],true,
+            [new UIInteraction("5","5a","SHOW","")],false,"",[9]));
+        ELEs.push(
+            new UIElement("5a","text","What was the curcumstances for the date noted above",true,[],true,
+            [],false,"",[0]));
         ELEs.push(
             new UIElement("6","checkbox","A bunch of check boxes",true,
             ["Checkbox option 1","Checkbox option 2","Checkbox option 3","Checkbox option 4","Checkbox option 5"],
