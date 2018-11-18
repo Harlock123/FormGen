@@ -175,6 +175,11 @@ If the class is defined as FG then
                 onclick="alert(' The Score is: ' + FG.GetFormScore());" 
                 id="btnScoreGet" value="Fetch Form Score">
 
+        <input type="button" 
+                onclick="alert(' The Va;idity is: ' + FG.IsFormValid());" 
+                id="btnValidityGet" value="Fetch Form Validity">
+
+
     </div>
 
     <script src="FormGen.js"></script>
@@ -182,14 +187,16 @@ If the class is defined as FG then
         var ELEs = new Array();
 
         ELEs.push(
-            new UIElement("1","text","The Label for this piece of input",true,[],true,[],true,"",[0]));
+            new UIElement("1","text","The Label for this piece of input",true,[],true,
+            [new UIInteraction("1","8","SHOW","N/A")],true,"",[0]));
         ELEs.push(
             new UIElement("2","narrative","The Label for this narrative",true,[],true,[],true,"",[1]));
         ELEs.push(
             new UIElement("3","radio","Gender",true,["Male","Female","Unknown"],true,
             [new UIInteraction("3","5","SHOW","Unknown")],true,"",[2,3,4]));
         ELEs.push(
-            new UIElement("4","dropdown","Select from the dropdown",true,["unset","1","2","3","4"], true,[],true,"",[0,5,6,7,8]));
+            new UIElement("4","dropdown","Select from the dropdown",true,["unset","1","2","3","4"], true,
+            [new UIInteraction("4","8","HIDE","unset")],true,"",[0,5,6,7,8]));
         ELEs.push(
             new UIElement("5","date","The Label Date",true,[],true,[],false,"",[9]));
         ELEs.push(
@@ -199,14 +206,21 @@ If the class is defined as FG then
         ELEs.push(
             new UIElement("7","narrative","Another Narrative is here",true,[],true,[],false,"",[15]));
         
+        ELEs.push(
+            new UIElement("8","narrative","A Third Narrative is here",true,[],true,[],false,"",[16]));
+        
         var FG = new FormGen('FormGenBody',ELEs);
 
+        /// This is a stub routine to wire up the UIInteractions
+        /// as I dont know how to have the class call into itself via the ONCLICK and ONCHANGE
+        /// manufactured handlers in the inserted DOM elements
+        /// Need to find a cleaner way to do this
         function DoFormGenInteraction(e)
         {
             FG.DoFormGenInteraction(e);
         }
 
-        function PopulateFromString()
+        function PopulateFromString() /// assumes the class is instanced as FG
         {
             var x = '[{"uivID":"1","uivValue":"test data"},{"uivID":"2","uivValue":"sadfsadfsadf"},'+
                  '{"uivID":"3_1","uivValue":"false"},{"uivID":"3_2","uivValue":"false"},' +
@@ -214,7 +228,9 @@ If the class is defined as FG then
                  '{"uivID":"5","uivValue":"2018-11-30"},{"uivID":"6_1","uivValue":"true"},'+
                  '{"uivID":"6_2","uivValue":"true"},{"uivID":"6_3","uivValue":"true"},'+
                  '{"uivID":"6_4","uivValue":"false"},{"uivID":"6_5","uivValue":"true"},'+
-                 '{"uivID":"7","uivValue":"asdfsadfsadf\\nMultiLine\\nMultiLine"}]';
+                 '{"uivID":"7","uivValue":"asdfsadfsadf\\nMultiLine\\nMultiLine"}]' +
+                 '{"uivID":"8","uivValue":"Some More Text Inserted into a Narrative\\nMultiLine\\nMultiLine"}]';
+                 
 
             FG.SetFormDataFromString(x);
 
@@ -225,5 +241,4 @@ If the class is defined as FG then
 
 </body>
 </html>
-
 ```
