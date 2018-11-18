@@ -80,8 +80,18 @@ var FormGen = /** @class */ (function () {
                         else
                             innerhtml += THEEL.elLabel + "<br>";
                     }
-                    innerhtml += '<textarea rows="5" cols="40" name = "' + THEEL.elID + '" id="'
-                        + THEEL.elID + '" ></textarea><br> ';
+                    if (!Array.isArray(THEEL.elInteractions) || !THEEL.elInteractions.length) {
+                        innerhtml += '<textarea rows="5" cols="40" name = "' + THEEL.elID + '" id="'
+                            + THEEL.elID + '" ></textarea><br> ';
+                    }
+                    else {
+                        for (var _c = 0, _d = THEEL.elInteractions; _c < _d.length; _c++) {
+                            var v = _d[_c];
+                            this.theUIInteractions.push(v);
+                        }
+                        innerhtml += '<textarea rows="5" cols="40" name = "' + THEEL.elID + '" id="'
+                            + THEEL.elID + '" onchange="DoFormGenInteraction(this)" ></textarea><br> ';
+                    }
                     innerhtml += '</div> ';
                     break;
                 }
@@ -102,8 +112,8 @@ var FormGen = /** @class */ (function () {
                             innerhtml += THEEL.elLabel + "<br>";
                     }
                     var i = 0;
-                    for (var _c = 0, _d = THEEL.elContent; _c < _d.length; _c++) {
-                        var v = _d[_c];
+                    for (var _e = 0, _f = THEEL.elContent; _e < _f.length; _e++) {
+                        var v = _f[_e];
                         i += 1;
                         if (!Array.isArray(THEEL.elInteractions) || !THEEL.elInteractions.length) {
                             innerhtml += '<input type="radio" ' +
@@ -112,8 +122,8 @@ var FormGen = /** @class */ (function () {
                                 'value="' + v + '" >' + v + '<br> ';
                         }
                         else {
-                            for (var _e = 0, _f = THEEL.elInteractions; _e < _f.length; _e++) {
-                                var v_1 = _f[_e];
+                            for (var _g = 0, _h = THEEL.elInteractions; _g < _h.length; _g++) {
+                                var v_1 = _h[_g];
                                 this.theUIInteractions.push(v_1);
                             }
                             innerhtml += '<input type="radio" ' +
@@ -145,16 +155,16 @@ var FormGen = /** @class */ (function () {
                         innerhtml += '<select name="' + THEEL.elID + '" id="' + THEEL.elID + '" >';
                     }
                     else {
-                        for (var _g = 0, _h = THEEL.elInteractions; _g < _h.length; _g++) {
-                            var v = _h[_g];
+                        for (var _j = 0, _k = THEEL.elInteractions; _j < _k.length; _j++) {
+                            var v = _k[_j];
                             this.theUIInteractions.push(v);
                         }
                         innerhtml += '<select name="' + THEEL.elID +
                             '" id="' + THEEL.elID + '" onchange="DoFormGenInteraction(this)" >';
                     }
                     var i = 0;
-                    for (var _j = 0, _k = THEEL.elContent; _j < _k.length; _j++) {
-                        var v = _k[_j];
+                    for (var _l = 0, _m = THEEL.elContent; _l < _m.length; _l++) {
+                        var v = _m[_l];
                         i += 1;
                         innerhtml += '<option ' +
                             'name = "' + THEEL.elID + '" id="' +
@@ -182,8 +192,8 @@ var FormGen = /** @class */ (function () {
                             innerhtml += THEEL.elLabel + "<br>";
                     }
                     var i = 0;
-                    for (var _l = 0, _m = THEEL.elContent; _l < _m.length; _l++) {
-                        var v = _m[_l];
+                    for (var _o = 0, _p = THEEL.elContent; _o < _p.length; _o++) {
+                        var v = _p[_o];
                         i += 1;
                         if (!Array.isArray(THEEL.elInteractions) || !THEEL.elInteractions.length) {
                             innerhtml += '<input type="checkbox" ' +
@@ -192,8 +202,8 @@ var FormGen = /** @class */ (function () {
                                 'value="' + v + '" >' + v + '<br> ';
                         }
                         else {
-                            for (var _o = 0, _p = THEEL.elInteractions; _o < _p.length; _o++) {
-                                var v_2 = _p[_o];
+                            for (var _q = 0, _r = THEEL.elInteractions; _q < _r.length; _q++) {
+                                var v_2 = _r[_q];
                                 this.theUIInteractions.push(v_2);
                             }
                             innerhtml += '<input type="checkbox" ' +
@@ -211,8 +221,8 @@ var FormGen = /** @class */ (function () {
         el.innerHTML = innerhtml;
         // Ok now all of the elements should be in the DOM
         // now we want to iterate over everything again to set any scoring and any required bits
-        for (var _q = 0, UIElements_2 = UIElements; _q < UIElements_2.length; _q++) {
-            var THEEL = UIElements_2[_q];
+        for (var _s = 0, UIElements_2 = UIElements; _s < UIElements_2.length; _s++) {
+            var THEEL = UIElements_2[_s];
             switch (THEEL.elType.toUpperCase()) {
                 case "TEXT": {
                     var el = (document.getElementById(THEEL.elID));
@@ -249,8 +259,8 @@ var FormGen = /** @class */ (function () {
                 }
                 case "RADIO": {
                     var i = 0;
-                    for (var _r = 0, _s = THEEL.elScore; _r < _s.length; _r++) {
-                        var v = _s[_r];
+                    for (var _t = 0, _u = THEEL.elScore; _t < _u.length; _t++) {
+                        var v = _u[_t];
                         i += 1;
                         var el = (document.getElementById(THEEL.elID + '_' + i.toString()));
                         el.dataset.fgscore = v.toString();
@@ -265,8 +275,8 @@ var FormGen = /** @class */ (function () {
                 }
                 case "DROPDOWN": {
                     var i = 0;
-                    for (var _t = 0, _u = THEEL.elScore; _t < _u.length; _t++) {
-                        var v = _u[_t];
+                    for (var _v = 0, _w = THEEL.elScore; _v < _w.length; _v++) {
+                        var v = _w[_v];
                         i += 1;
                         var ell = (document.getElementById(THEEL.elID + '_' + i.toString()));
                         ell.dataset.fgscore = v.toString();
@@ -281,8 +291,8 @@ var FormGen = /** @class */ (function () {
                 }
                 case "CHECKBOX": {
                     var i = 0;
-                    for (var _v = 0, _w = THEEL.elScore; _v < _w.length; _v++) {
-                        var v = _w[_v];
+                    for (var _x = 0, _y = THEEL.elScore; _x < _y.length; _x++) {
+                        var v = _y[_x];
                         i += 1;
                         var el = (document.getElementById(THEEL.elID + '_' + i.toString()));
                         el.dataset.fgscore = v.toString();
@@ -761,7 +771,7 @@ var FormGen = /** @class */ (function () {
                         }
                     }
                     else {
-                        if (e.type.toUpperCase() == "TEXT") {
+                        if (e.type.toUpperCase() == "TEXT" || e.type.toUpperCase() == "TEXTAREA") {
                             // do something here
                             var v = e.value.toUpperCase();
                             var thetriggeredelement = document.getElementById("div_" + UIi.elIDTarget);

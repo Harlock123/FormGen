@@ -131,8 +131,23 @@ class FormGen
                         else
                             innerhtml += THEEL.elLabel + "<br>";
                     }
-                    innerhtml += '<textarea rows="5" cols="40" name = "' + THEEL.elID +'" id="' 
-                    + THEEL.elID + '" ></textarea><br> ';
+
+                    if (!Array.isArray(THEEL.elInteractions) || !THEEL.elInteractions.length )
+                    {
+                        innerhtml += '<textarea rows="5" cols="40" name = "' + THEEL.elID +'" id="' 
+                        + THEEL.elID + '" ></textarea><br> ';
+                    }
+                    else
+                    {
+                        for (let v of THEEL.elInteractions)
+                        {
+                            this.theUIInteractions.push(v);
+                        }
+
+                        innerhtml += '<textarea rows="5" cols="40" name = "' + THEEL.elID +'" id="' 
+                        + THEEL.elID + '" onchange="DoFormGenInteraction(this)" ></textarea><br> ';
+                    
+                    }
 
                     innerhtml += '</div> ';
 
@@ -1115,7 +1130,7 @@ class FormGen
                     }
                     else
                     {
-                        if (e.type.toUpperCase() == "TEXT")
+                        if (e.type.toUpperCase() == "TEXT" || e.type.toUpperCase() == "TEXTAREA")
                         {
                             // do something here
 
