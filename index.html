@@ -46,7 +46,8 @@
             new UIElement("3","radio","Gender",true,["Male","Female","Unknown"],true,
             [new UIInteraction("3","5","SHOW","Unknown")],true,"",[2,3,4]));
         ELEs.push(
-            new UIElement("4","dropdown","Select from the dropdown",true,["unset","1","2","3","4"], true,[],true,"",[0,5,6,7,8]));
+            new UIElement("4","dropdown","Select from the dropdown",true,["unset","1","2","3","4"], true,
+            [new UIInteraction("4","8","HIDE","unset")],true,"",[0,5,6,7,8]));
         ELEs.push(
             new UIElement("5","date","The Label Date",true,[],true,[],false,"",[9]));
         ELEs.push(
@@ -55,6 +56,9 @@
             true,[new UIInteraction("6","7","SHOW","Checkbox option 3")],true,"",[10,11,12,13,14]));
         ELEs.push(
             new UIElement("7","narrative","Another Narrative is here",true,[],true,[],false,"",[15]));
+        
+        ELEs.push(
+            new UIElement("8","narrative","A Third Narrative is here",true,[],true,[],false,"",[16]));
         
         var FG = new FormGen('FormGenBody',ELEs);
 

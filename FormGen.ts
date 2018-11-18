@@ -205,7 +205,20 @@ class FormGen
                             innerhtml += THEEL.elLabel + "<br>";
                     }
 
-                    innerhtml += '<select id="' + THEEL.elID + '" >';
+                    if (!Array.isArray(THEEL.elInteractions) || !THEEL.elInteractions.length )
+                    {
+                        innerhtml += '<select name="' + THEEL.elID + '" id="' + THEEL.elID + '" >';
+                    }
+                    else
+                    {
+                        for (let v of THEEL.elInteractions)
+                        {
+                            this.theUIInteractions.push(v);
+                        }
+
+                        innerhtml += '<select name="' + THEEL.elID + 
+                            '" id="' + THEEL.elID + '" onchange="DoFormGenInteraction(this)" >';
+                    }
 
                     let i = 0;
                     for(let v of THEEL.elContent)
@@ -791,7 +804,7 @@ class FormGen
             if (e.name == UIi.elIDSource)
             {
                 // we have a rule that is triggered by this potentially
-                if (e.type == "radio" || e.type == "checkbox")
+                if (e.type.toUpperCase() == "RADIO" || e.type.toUpperCase() == "CHECKBOX")
                 {
                     // there may be several so lets get them all to look at their values
                     var radios = document.getElementsByName(e.name);
@@ -842,8 +855,51 @@ class FormGen
 
                     }
                 }
+                else
+                {
+
+                    if (e.type.toUpperCase().startsWith("SELECT"))
+                    {
+                        var v = e.value;
+
+                        var thetriggeredelement = document.getElementById("div_" + UIi.elIDTarget);
+
+                        if (v == UIi.elValueTrigger )
+                        {
+                            
+                            if (UIi.elInteractionType=="SHOW")
+                            {
+                                thetriggeredelement.style.display = "block";
+                            }
+                            else
+                            {
+                                if (UIi.elInteractionType=="HIDE")
+                                {
+                                    thetriggeredelement.style.display = "none";
+                                }
+                            }
+
+                        }
+                        else
+                        {
+                            if (UIi.elInteractionType=="SHOW")
+                            {
+                                thetriggeredelement.style.display = "none";
+                            }
+                            else
+                            {
+                                if (UIi.elInteractionType=="HIDE")
+                                {
+                                    thetriggeredelement.style.display = "block";
+                                }
+                            }
+
+                        }
+                    }
+                }
             }
         }
+        
 
         //alert("Interacted Here current value of ");
     }
