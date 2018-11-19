@@ -17,7 +17,7 @@ class FormGen
 
         // get the actual html element where we will put all this stuff
         var el = document.getElementById(DomElementID);
-        var innerhtml = '<form> <br> ';
+        var innerhtml = '<form> <table style="width: 100%;"> ';
 
         // iterate over all the defined elements and parse them and insert them into the dom
         for (let THEEL of UIElements)
@@ -33,14 +33,18 @@ class FormGen
                         STY = ' style="' + THEEL.elStyle + '" ';
                     }
 
-                    var VIS = "";
+                    var VIS = "";//'style="display:block"';
 
                     if (!THEEL.elInitialVisibility)
                     {
-                        VIS = "hidden";
+                        VIS = 'style="display:none"';
                     }
 
-                    innerhtml += '<div id="' + 'div_' + THEEL.elID + '" ' + VIS + STY + ' >';
+                    //innerhtml += '<div id="' + 'div_' + THEEL.elID + '" ' + VIS + STY + ' >';
+
+                    innerhtml += '<tr id="' + 'div_' + THEEL.elID + '" ' + VIS + STY + ' >';
+
+                    innerhtml += '<td>';
 
                     if (THEEL.elLabel.trim()!= "")
                     {
@@ -50,6 +54,11 @@ class FormGen
                         else
                             innerhtml += THEEL.elLabel + "<br>";
                     }
+
+                    innerhtml += "</td>";
+
+                    innerhtml += "<td>";
+                    
 
                     if (!Array.isArray(THEEL.elInteractions) || !THEEL.elInteractions.length )
                     {
@@ -68,7 +77,9 @@ class FormGen
                     
                     }
 
-                    innerhtml += '</div> ';
+                    innerhtml += '</td></tr>';
+
+                    //innerhtml += '</div> ';
 
                     break;
 
@@ -82,14 +93,18 @@ class FormGen
                         STY = ' style="' + THEEL.elStyle + '" ';
                     }
 
-                    var VIS = "";
+                    var VIS = "";//'style="display:block"';
 
                     if (!THEEL.elInitialVisibility)
                     {
-                        VIS = "hidden";
+                        VIS = 'style="display:none"';
                     }
 
-                    innerhtml += '<div id="' + 'div_' + THEEL.elID + '" ' + VIS + STY + ' >';
+                    //innerhtml += '<div id="' + 'div_' + THEEL.elID + '" ' + VIS + STY + ' >';
+
+                    innerhtml += '<tr id="' + 'div_' + THEEL.elID + '" ' + VIS + STY + ' >';
+
+                    innerhtml += '<td>';
 
                     if (THEEL.elLabel.trim()!= "")
                     {
@@ -99,6 +114,10 @@ class FormGen
                         else
                             innerhtml += THEEL.elLabel + "<br>";
                     }
+
+                    innerhtml += "</td>";
+
+                    innerhtml += "<td>";
 
                     if (!Array.isArray(THEEL.elInteractions) || !THEEL.elInteractions.length )
                     {
@@ -117,7 +136,9 @@ class FormGen
                     
                     }
 
-                    innerhtml += '</div> ';
+                    innerhtml += '</td></tr>';
+
+                    //innerhtml += '</div> ';
 
                     break;
 
@@ -131,14 +152,18 @@ class FormGen
                         STY = ' style="' + THEEL.elStyle + '" ';
                     }
 
-                    var VIS = "";
+                    var VIS = "";//'style="display:block"';
 
                     if (!THEEL.elInitialVisibility)
                     {
-                        VIS = "hidden";
+                        VIS = 'style="display:none"';
                     }
 
-                    innerhtml += '<div id="' + 'div_' + THEEL.elID + '" ' + VIS + STY + ' >';
+                    //innerhtml += '<div id="' + 'div_' + THEEL.elID + '" ' + VIS + STY + ' >';
+
+                    innerhtml += '<tr id="' + 'div_' + THEEL.elID + '" ' + VIS + STY + ' >';
+
+                    innerhtml += '<td>';
 
                     if (THEEL.elLabel.trim()!= "")
                     {
@@ -147,6 +172,10 @@ class FormGen
                         else
                             innerhtml += THEEL.elLabel + "<br>";
                     }
+
+                    innerhtml += "</td>";
+
+                    innerhtml += "<td>";
 
                     if (!Array.isArray(THEEL.elInteractions) || !THEEL.elInteractions.length )
                     {
@@ -165,7 +194,9 @@ class FormGen
                     
                     }
 
-                    innerhtml += '</div> ';
+                    innerhtml += '</td></tr>';
+
+                    //innerhtml += '</div> ';
 
                     break;
 
@@ -179,14 +210,18 @@ class FormGen
                         STY = ' style="' + THEEL.elStyle + '" ';
                     }
 
-                    var VIS = "";
+                    var VIS = "";//'style="display:block"';
 
                     if (!THEEL.elInitialVisibility)
                     {
-                        VIS = "hidden";
+                        VIS = 'style="display:none"';
                     }
 
-                    innerhtml += '<div id="' + 'div_' + THEEL.elID + '" ' + VIS + STY + ' >';
+                    //innerhtml += '<div id="' + 'div_' + THEEL.elID + '" ' + VIS + STY + ' >';
+
+                    innerhtml += '<tr id="' + 'div_' + THEEL.elID + '" ' + VIS + STY + ' >';
+
+                    innerhtml += '<td>';
 
                     if (THEEL.elLabel.trim()!= "")
                     {
@@ -195,6 +230,10 @@ class FormGen
                         else
                             innerhtml += THEEL.elLabel + "<br>";
                     }
+
+                    innerhtml += "</td>";
+
+                    innerhtml += "<td>";
 
                     let i = 0;
                     for(let v of THEEL.elContent)
@@ -222,7 +261,9 @@ class FormGen
                         }
                     }
 
-                    innerhtml += '</div> ';
+                    innerhtml += '</td></tr>';
+
+                    //innerhtml += '</div> ';
 
                     break;
                 }
@@ -235,14 +276,18 @@ class FormGen
                         STY = ' style="' + THEEL.elStyle + '" ';
                     }
 
-                    var VIS = "";
+                    var VIS = "";//'style="display:block"';
 
                     if (!THEEL.elInitialVisibility)
                     {
-                        VIS = "hidden";
+                        VIS = 'style="display:none"';
                     }
 
-                    innerhtml += '<div id="' + 'div_' + THEEL.elID + '" ' + VIS + STY + ' >';
+                    // innerhtml += '<div id="' + 'div_' + THEEL.elID + '" ' + VIS + STY + ' >';
+
+                    innerhtml += '<tr id="' + 'div_' + THEEL.elID + '" ' + VIS + STY + ' >';
+
+                    innerhtml += '<td>';
 
                     if (THEEL.elLabel.trim()!= "")
                     {
@@ -251,6 +296,10 @@ class FormGen
                         else
                             innerhtml += THEEL.elLabel + "<br>";
                     }
+
+                    innerhtml += "</td>";
+
+                    innerhtml += "<td>";
 
                     if (!Array.isArray(THEEL.elInteractions) || !THEEL.elInteractions.length )
                     {
@@ -278,7 +327,9 @@ class FormGen
                     }
                     innerhtml += '</select><br>';
 
-                    innerhtml += '</div> ';
+                    innerhtml += '</td></tr>';
+
+                    //innerhtml += '</div> ';
 
                     break;
 
@@ -292,14 +343,18 @@ class FormGen
                         STY = ' style="' + THEEL.elStyle + '" ';
                     }
 
-                    var VIS = "";
+                    var VIS = "";//'style="display:block"';
 
                     if (!THEEL.elInitialVisibility)
                     {
-                        VIS = "hidden";
+                        VIS = 'style="display:none"';
                     }
 
-                    innerhtml += '<div id="' + 'div_' + THEEL.elID + '" ' + VIS + STY + ' >';
+                    // innerhtml += '<div id="' + 'div_' + THEEL.elID + '" ' + VIS + STY + ' >';
+
+                    innerhtml += '<tr id="' + 'div_' + THEEL.elID + '" ' + VIS + STY + ' >';
+
+                    innerhtml += '<td>';
 
                     if (THEEL.elLabel.trim()!= "")
                     {
@@ -308,6 +363,10 @@ class FormGen
                         else
                             innerhtml += THEEL.elLabel + "<br>";
                     }
+
+                    innerhtml += "</td>";
+
+                    innerhtml += "<td>";
 
                     let i = 0;
                     for(let v of THEEL.elContent)
@@ -335,7 +394,9 @@ class FormGen
                         }
                     }
 
-                    innerhtml += '</div> ';
+                    innerhtml += '</td></tr>';
+
+                    //innerhtml += '</div> ';
 
                     break;
 
@@ -343,7 +404,7 @@ class FormGen
             }
         }
 
-        innerhtml += "</form>";
+        innerhtml += "</table></form>";
 
         el.innerHTML = innerhtml;
 
@@ -1073,7 +1134,7 @@ class FormGen
                             {
                                 // we are gonna make sure something is visible
 
-                                thetriggeredelement.style.display = "block";
+                                thetriggeredelement.style.display = "";//"block";
                             }
                             else
                             {
@@ -1087,7 +1148,7 @@ class FormGen
                                     if (!it.checked && UIi.elInteractionType == "HIDE")
                                     {
                                         // we are gonna make sure something is visible
-                                        thetriggeredelement.style.display = "block";
+                                        thetriggeredelement.style.display = "";// "block";
                                     }
                                     else
                                     {
@@ -1117,7 +1178,7 @@ class FormGen
                             
                             if (UIi.elInteractionType=="SHOW")
                             {
-                                thetriggeredelement.style.display = "block";
+                                thetriggeredelement.style.display = "";//"block";
                             }
                             else
                             {
@@ -1138,7 +1199,7 @@ class FormGen
                             {
                                 if (UIi.elInteractionType=="HIDE")
                                 {
-                                    thetriggeredelement.style.display = "block";
+                                    thetriggeredelement.style.display = "";//"block";
                                 }
                             }
 
@@ -1159,7 +1220,7 @@ class FormGen
                             
                                 if (UIi.elInteractionType=="SHOW")
                                 {
-                                    thetriggeredelement.style.display = "block";
+                                    thetriggeredelement.style.display = "";//"block";
                                 }
                                 else
                                 {
@@ -1180,7 +1241,7 @@ class FormGen
                                 {
                                     if (UIi.elInteractionType=="HIDE")
                                     {
-                                        thetriggeredelement.style.display = "block";
+                                        thetriggeredelement.style.display = "";//"block";
                                     }
                                 }
                             }
@@ -1200,7 +1261,7 @@ class FormGen
                             
                                     if (UIi.elInteractionType=="SHOW")
                                     {
-                                        thetriggeredelement.style.display = "block";
+                                        thetriggeredelement.style.display = "";//"block";
                                     }
                                     else
                                     {
@@ -1221,7 +1282,7 @@ class FormGen
                                     {
                                         if (UIi.elInteractionType=="HIDE")
                                         {
-                                            thetriggeredelement.style.display = "block";
+                                            thetriggeredelement.style.display = "";//"block";
                                         }
                                     }
                                 }

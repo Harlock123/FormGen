@@ -8,7 +8,7 @@ var FormGen = /** @class */ (function () {
         this.theUIElements = UIElements;
         // get the actual html element where we will put all this stuff
         var el = document.getElementById(DomElementID);
-        var innerhtml = '<form> <br> ';
+        var innerhtml = '<form> <table style="width: 100%;"> ';
         // iterate over all the defined elements and parse them and insert them into the dom
         for (var _i = 0, UIElements_1 = UIElements; _i < UIElements_1.length; _i++) {
             var THEEL = UIElements_1[_i];
@@ -18,17 +18,21 @@ var FormGen = /** @class */ (function () {
                     if (THEEL.elStyle != "") {
                         STY = ' style="' + THEEL.elStyle + '" ';
                     }
-                    var VIS = "";
+                    var VIS = ""; //'style="display:block"';
                     if (!THEEL.elInitialVisibility) {
-                        VIS = "hidden";
+                        VIS = 'style="display:none"';
                     }
-                    innerhtml += '<div id="' + 'div_' + THEEL.elID + '" ' + VIS + STY + ' >';
+                    //innerhtml += '<div id="' + 'div_' + THEEL.elID + '" ' + VIS + STY + ' >';
+                    innerhtml += '<tr id="' + 'div_' + THEEL.elID + '" ' + VIS + STY + ' >';
+                    innerhtml += '<td>';
                     if (THEEL.elLabel.trim() != "") {
                         if (THEEL.elLabelBold)
                             innerhtml += "<b>" + THEEL.elLabel + "</b><br>";
                         else
                             innerhtml += THEEL.elLabel + "<br>";
                     }
+                    innerhtml += "</td>";
+                    innerhtml += "<td>";
                     if (!Array.isArray(THEEL.elInteractions) || !THEEL.elInteractions.length) {
                         innerhtml += '<input type="text" name = "' + THEEL.elID +
                             '" id="' + THEEL.elID + '" ><br> ';
@@ -41,7 +45,8 @@ var FormGen = /** @class */ (function () {
                         innerhtml += '<input type="text" name = "' + THEEL.elID +
                             '" id="' + THEEL.elID + '" onchange="DoFormGenInteraction(this)" ><br> ';
                     }
-                    innerhtml += '</div> ';
+                    innerhtml += '</td></tr>';
+                    //innerhtml += '</div> ';
                     break;
                 }
                 case "DATE": {
@@ -49,17 +54,21 @@ var FormGen = /** @class */ (function () {
                     if (THEEL.elStyle != "") {
                         STY = ' style="' + THEEL.elStyle + '" ';
                     }
-                    var VIS = "";
+                    var VIS = ""; //'style="display:block"';
                     if (!THEEL.elInitialVisibility) {
-                        VIS = "hidden";
+                        VIS = 'style="display:none"';
                     }
-                    innerhtml += '<div id="' + 'div_' + THEEL.elID + '" ' + VIS + STY + ' >';
+                    //innerhtml += '<div id="' + 'div_' + THEEL.elID + '" ' + VIS + STY + ' >';
+                    innerhtml += '<tr id="' + 'div_' + THEEL.elID + '" ' + VIS + STY + ' >';
+                    innerhtml += '<td>';
                     if (THEEL.elLabel.trim() != "") {
                         if (THEEL.elLabelBold)
                             innerhtml += "<b>" + THEEL.elLabel + "</b><br>";
                         else
                             innerhtml += THEEL.elLabel + "<br>";
                     }
+                    innerhtml += "</td>";
+                    innerhtml += "<td>";
                     if (!Array.isArray(THEEL.elInteractions) || !THEEL.elInteractions.length) {
                         innerhtml += '<input type="date" name = "' + THEEL.elID +
                             '" id="' + THEEL.elID + '" ><br> ';
@@ -72,7 +81,8 @@ var FormGen = /** @class */ (function () {
                         innerhtml += '<input type="date" name = "' + THEEL.elID +
                             '" id="' + THEEL.elID + '" onchange="DoFormGenInteraction(this)" ><br> ';
                     }
-                    innerhtml += '</div> ';
+                    innerhtml += '</td></tr>';
+                    //innerhtml += '</div> ';
                     break;
                 }
                 case "NARRATIVE": {
@@ -80,17 +90,21 @@ var FormGen = /** @class */ (function () {
                     if (THEEL.elStyle != "") {
                         STY = ' style="' + THEEL.elStyle + '" ';
                     }
-                    var VIS = "";
+                    var VIS = ""; //'style="display:block"';
                     if (!THEEL.elInitialVisibility) {
-                        VIS = "hidden";
+                        VIS = 'style="display:none"';
                     }
-                    innerhtml += '<div id="' + 'div_' + THEEL.elID + '" ' + VIS + STY + ' >';
+                    //innerhtml += '<div id="' + 'div_' + THEEL.elID + '" ' + VIS + STY + ' >';
+                    innerhtml += '<tr id="' + 'div_' + THEEL.elID + '" ' + VIS + STY + ' >';
+                    innerhtml += '<td>';
                     if (THEEL.elLabel.trim() != "") {
                         if (THEEL.elLabelBold)
                             innerhtml += "<b>" + THEEL.elLabel + "</b><br>";
                         else
                             innerhtml += THEEL.elLabel + "<br>";
                     }
+                    innerhtml += "</td>";
+                    innerhtml += "<td>";
                     if (!Array.isArray(THEEL.elInteractions) || !THEEL.elInteractions.length) {
                         innerhtml += '<textarea rows="5" cols="40" name = "' + THEEL.elID + '" id="'
                             + THEEL.elID + '" ></textarea><br> ';
@@ -103,7 +117,8 @@ var FormGen = /** @class */ (function () {
                         innerhtml += '<textarea rows="5" cols="40" name = "' + THEEL.elID + '" id="'
                             + THEEL.elID + '" onchange="DoFormGenInteraction(this)" ></textarea><br> ';
                     }
-                    innerhtml += '</div> ';
+                    innerhtml += '</td></tr>';
+                    //innerhtml += '</div> ';
                     break;
                 }
                 case "RADIO": {
@@ -111,17 +126,21 @@ var FormGen = /** @class */ (function () {
                     if (THEEL.elStyle != "") {
                         STY = ' style="' + THEEL.elStyle + '" ';
                     }
-                    var VIS = "";
+                    var VIS = ""; //'style="display:block"';
                     if (!THEEL.elInitialVisibility) {
-                        VIS = "hidden";
+                        VIS = 'style="display:none"';
                     }
-                    innerhtml += '<div id="' + 'div_' + THEEL.elID + '" ' + VIS + STY + ' >';
+                    //innerhtml += '<div id="' + 'div_' + THEEL.elID + '" ' + VIS + STY + ' >';
+                    innerhtml += '<tr id="' + 'div_' + THEEL.elID + '" ' + VIS + STY + ' >';
+                    innerhtml += '<td>';
                     if (THEEL.elLabel.trim() != "") {
                         if (THEEL.elLabelBold)
                             innerhtml += "<b>" + THEEL.elLabel + "</b><br>";
                         else
                             innerhtml += THEEL.elLabel + "<br>";
                     }
+                    innerhtml += "</td>";
+                    innerhtml += "<td>";
                     var i = 0;
                     for (var _g = 0, _h = THEEL.elContent; _g < _h.length; _g++) {
                         var v = _h[_g];
@@ -143,7 +162,8 @@ var FormGen = /** @class */ (function () {
                                 'value="' + v + '" onchange="DoFormGenInteraction(this)" >' + v + '<br> ';
                         }
                     }
-                    innerhtml += '</div> ';
+                    innerhtml += '</td></tr>';
+                    //innerhtml += '</div> ';
                     break;
                 }
                 case "DROPDOWN": {
@@ -151,17 +171,21 @@ var FormGen = /** @class */ (function () {
                     if (THEEL.elStyle != "") {
                         STY = ' style="' + THEEL.elStyle + '" ';
                     }
-                    var VIS = "";
+                    var VIS = ""; //'style="display:block"';
                     if (!THEEL.elInitialVisibility) {
-                        VIS = "hidden";
+                        VIS = 'style="display:none"';
                     }
-                    innerhtml += '<div id="' + 'div_' + THEEL.elID + '" ' + VIS + STY + ' >';
+                    // innerhtml += '<div id="' + 'div_' + THEEL.elID + '" ' + VIS + STY + ' >';
+                    innerhtml += '<tr id="' + 'div_' + THEEL.elID + '" ' + VIS + STY + ' >';
+                    innerhtml += '<td>';
                     if (THEEL.elLabel.trim() != "") {
                         if (THEEL.elLabelBold)
                             innerhtml += "<b>" + THEEL.elLabel + "</b><br>";
                         else
                             innerhtml += THEEL.elLabel + "<br>";
                     }
+                    innerhtml += "</td>";
+                    innerhtml += "<td>";
                     if (!Array.isArray(THEEL.elInteractions) || !THEEL.elInteractions.length) {
                         innerhtml += '<select name="' + THEEL.elID + '" id="' + THEEL.elID + '" >';
                     }
@@ -183,7 +207,8 @@ var FormGen = /** @class */ (function () {
                             'value="' + v + '" >' + v + '</option> ';
                     }
                     innerhtml += '</select><br>';
-                    innerhtml += '</div> ';
+                    innerhtml += '</td></tr>';
+                    //innerhtml += '</div> ';
                     break;
                 }
                 case "CHECKBOX": {
@@ -191,17 +216,21 @@ var FormGen = /** @class */ (function () {
                     if (THEEL.elStyle != "") {
                         STY = ' style="' + THEEL.elStyle + '" ';
                     }
-                    var VIS = "";
+                    var VIS = ""; //'style="display:block"';
                     if (!THEEL.elInitialVisibility) {
-                        VIS = "hidden";
+                        VIS = 'style="display:none"';
                     }
-                    innerhtml += '<div id="' + 'div_' + THEEL.elID + '" ' + VIS + STY + ' >';
+                    // innerhtml += '<div id="' + 'div_' + THEEL.elID + '" ' + VIS + STY + ' >';
+                    innerhtml += '<tr id="' + 'div_' + THEEL.elID + '" ' + VIS + STY + ' >';
+                    innerhtml += '<td>';
                     if (THEEL.elLabel.trim() != "") {
                         if (THEEL.elLabelBold)
                             innerhtml += "<b>" + THEEL.elLabel + "</b><br>";
                         else
                             innerhtml += THEEL.elLabel + "<br>";
                     }
+                    innerhtml += "</td>";
+                    innerhtml += "<td>";
                     var i = 0;
                     for (var _q = 0, _r = THEEL.elContent; _q < _r.length; _q++) {
                         var v = _r[_q];
@@ -223,12 +252,13 @@ var FormGen = /** @class */ (function () {
                                 'value="' + v + '" onchange="DoFormGenInteraction(this)" >' + v + '<br> ';
                         }
                     }
-                    innerhtml += '</div> ';
+                    innerhtml += '</td></tr>';
+                    //innerhtml += '</div> ';
                     break;
                 }
             }
         }
-        innerhtml += "</form>";
+        innerhtml += "</table></form>";
         el.innerHTML = innerhtml;
         // Ok now all of the elements should be in the DOM
         // now we want to iterate over everything again to set any scoring and any required bits
@@ -735,7 +765,7 @@ var FormGen = /** @class */ (function () {
                             var thetriggeredelement = document.getElementById("div_" + UIi.elIDTarget);
                             if (it.checked && UIi.elInteractionType == "SHOW") {
                                 // we are gonna make sure something is visible
-                                thetriggeredelement.style.display = "block";
+                                thetriggeredelement.style.display = ""; //"block";
                             }
                             else {
                                 if (it.checked && UIi.elInteractionType == "HIDE") {
@@ -745,7 +775,7 @@ var FormGen = /** @class */ (function () {
                                 else {
                                     if (!it.checked && UIi.elInteractionType == "HIDE") {
                                         // we are gonna make sure something is visible
-                                        thetriggeredelement.style.display = "block";
+                                        thetriggeredelement.style.display = ""; // "block";
                                     }
                                     else {
                                         // we are gonna make sure something is hidden
@@ -762,7 +792,7 @@ var FormGen = /** @class */ (function () {
                         var thetriggeredelement = document.getElementById("div_" + UIi.elIDTarget);
                         if (v == UIi.elValueTrigger) {
                             if (UIi.elInteractionType == "SHOW") {
-                                thetriggeredelement.style.display = "block";
+                                thetriggeredelement.style.display = ""; //"block";
                             }
                             else {
                                 if (UIi.elInteractionType == "HIDE") {
@@ -776,7 +806,7 @@ var FormGen = /** @class */ (function () {
                             }
                             else {
                                 if (UIi.elInteractionType == "HIDE") {
-                                    thetriggeredelement.style.display = "block";
+                                    thetriggeredelement.style.display = ""; //"block";
                                 }
                             }
                         }
@@ -788,7 +818,7 @@ var FormGen = /** @class */ (function () {
                             var thetriggeredelement = document.getElementById("div_" + UIi.elIDTarget);
                             if (v == UIi.elValueTrigger.toUpperCase()) {
                                 if (UIi.elInteractionType == "SHOW") {
-                                    thetriggeredelement.style.display = "block";
+                                    thetriggeredelement.style.display = ""; //"block";
                                 }
                                 else {
                                     if (UIi.elInteractionType == "HIDE") {
@@ -802,7 +832,7 @@ var FormGen = /** @class */ (function () {
                                 }
                                 else {
                                     if (UIi.elInteractionType == "HIDE") {
-                                        thetriggeredelement.style.display = "block";
+                                        thetriggeredelement.style.display = ""; //"block";
                                     }
                                 }
                             }
@@ -814,7 +844,7 @@ var FormGen = /** @class */ (function () {
                                 var thetriggeredelement = document.getElementById("div_" + UIi.elIDTarget);
                                 if (v != "") {
                                     if (UIi.elInteractionType == "SHOW") {
-                                        thetriggeredelement.style.display = "block";
+                                        thetriggeredelement.style.display = ""; //"block";
                                     }
                                     else {
                                         if (UIi.elInteractionType == "HIDE") {
@@ -828,7 +858,7 @@ var FormGen = /** @class */ (function () {
                                     }
                                     else {
                                         if (UIi.elInteractionType == "HIDE") {
-                                            thetriggeredelement.style.display = "block";
+                                            thetriggeredelement.style.display = ""; //"block";
                                         }
                                     }
                                 }
