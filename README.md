@@ -139,6 +139,7 @@ If the class is defined as FG then
  
 
 ### SAMPLE HTML
+(also included in the project)
 
 ```html
 <!DOCTYPE html>
