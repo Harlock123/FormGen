@@ -3,6 +3,7 @@ class FormGen {
     private theUIInteractions: UIInteraction[] = [];
     private theContainer: string;
     private theUIElements: UIElement[];
+    private theVersionString: string = "";
 
     constructor(DomElementID: string, UIElements: UIElement[]) {
         // DomElementID will be the container for all the inserted form content
@@ -487,6 +488,13 @@ class FormGen {
     public GetFormData() {
         var UIValues: UIValue[] = [];
 
+        // first we want to echo the version as one of the elements
+        
+        var theversion = new UIValue("FORMVERSIONSTRING", this.theVersionString + "");
+
+        UIValues.push(theversion);
+
+
         for (let THEEL of this.theUIElements) {
             switch (THEEL.elType.toUpperCase()) {
                 case "TEXT":
@@ -600,6 +608,17 @@ class FormGen {
      *  UIValues: UIValue[]
      */
     public SetFormData(UIValues: UIValue[]) {
+
+        // look for the  version string first and set it
+
+        for (let uivs of UIValues)
+        {
+            if (uivs.uivID.toLocaleUpperCase() == "FORMVERSIONSTRING")
+            {
+                this.theVersionString = uivs.uivValue;
+                break;
+            }
+        }
 
         for (let THEEL of this.theUIElements) {
             switch (THEEL.elType.toUpperCase()) {

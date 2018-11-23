@@ -2,6 +2,7 @@ var FormGen = /** @class */ (function () {
     function FormGen(DomElementID, UIElements) {
         // DomElementID will be the container for all the inserted form content
         this.theUIInteractions = [];
+        this.theVersionString = "";
         // save the containerID for further use elsewhere
         this.theContainer = DomElementID;
         // save the handed in UIElements for further processing later
@@ -354,6 +355,9 @@ var FormGen = /** @class */ (function () {
      */
     FormGen.prototype.GetFormData = function () {
         var UIValues = [];
+        // first we want to echo the version as one of the elements
+        var theversion = new UIValue("FORMVERSIONSTRING", this.theVersionString + "");
+        UIValues.push(theversion);
         for (var _i = 0, _a = this.theUIElements; _i < _a.length; _i++) {
             var THEEL = _a[_i];
             switch (THEEL.elType.toUpperCase()) {
@@ -440,23 +444,18 @@ var FormGen = /** @class */ (function () {
      *  UIValues: UIValue[]
      */
     FormGen.prototype.SetFormData = function (UIValues) {
-        for (var _i = 0, _a = this.theUIElements; _i < _a.length; _i++) {
-            var THEEL = _a[_i];
+        // look for the  version string first and set it
+        for (var _i = 0, UIValues_1 = UIValues; _i < UIValues_1.length; _i++) {
+            var uivs = UIValues_1[_i];
+            if (uivs.uivID.toLocaleUpperCase() == "FORMVERSIONSTRING") {
+                this.theVersionString = uivs.uivValue;
+                break;
+            }
+        }
+        for (var _a = 0, _b = this.theUIElements; _a < _b.length; _a++) {
+            var THEEL = _b[_a];
             switch (THEEL.elType.toUpperCase()) {
                 case "TEXT":
-                    {
-                        var el = (document.getElementById(THEEL.elID));
-                        for (var _b = 0, UIValues_1 = UIValues; _b < UIValues_1.length; _b++) {
-                            var theval = UIValues_1[_b];
-                            if (theval.uivID == THEEL.elID) {
-                                el.value = theval.uivValue;
-                                this.DoFormGenInteraction(el);
-                                break;
-                            }
-                        }
-                        break;
-                    }
-                case "DATE":
                     {
                         var el = (document.getElementById(THEEL.elID));
                         for (var _c = 0, UIValues_2 = UIValues; _c < UIValues_2.length; _c++) {
@@ -469,7 +468,7 @@ var FormGen = /** @class */ (function () {
                         }
                         break;
                     }
-                case "NARRATIVE":
+                case "DATE":
                     {
                         var el = (document.getElementById(THEEL.elID));
                         for (var _d = 0, UIValues_3 = UIValues; _d < UIValues_3.length; _d++) {
@@ -482,15 +481,28 @@ var FormGen = /** @class */ (function () {
                         }
                         break;
                     }
+                case "NARRATIVE":
+                    {
+                        var el = (document.getElementById(THEEL.elID));
+                        for (var _e = 0, UIValues_4 = UIValues; _e < UIValues_4.length; _e++) {
+                            var theval = UIValues_4[_e];
+                            if (theval.uivID == THEEL.elID) {
+                                el.value = theval.uivValue;
+                                this.DoFormGenInteraction(el);
+                                break;
+                            }
+                        }
+                        break;
+                    }
                 case "RADIO":
                     {
                         var i = 0;
-                        for (var _e = 0, _f = THEEL.elContent; _e < _f.length; _e++) {
-                            var vv = _f[_e];
+                        for (var _f = 0, _g = THEEL.elContent; _f < _g.length; _f++) {
+                            var vv = _g[_f];
                             i += 1;
                             var el = (document.getElementById(THEEL.elID + "_" + i.toString()));
-                            for (var _g = 0, UIValues_4 = UIValues; _g < UIValues_4.length; _g++) {
-                                var theval = UIValues_4[_g];
+                            for (var _h = 0, UIValues_5 = UIValues; _h < UIValues_5.length; _h++) {
+                                var theval = UIValues_5[_h];
                                 if (theval.uivID == el.id) {
                                     if (theval.uivValue.toUpperCase() == "TRUE") {
                                         el.checked = true;
@@ -508,12 +520,12 @@ var FormGen = /** @class */ (function () {
                 case "DROPDOWN":
                     {
                         var ell = (document.getElementById(THEEL.elID));
-                        for (var _h = 0, UIValues_5 = UIValues; _h < UIValues_5.length; _h++) {
-                            var theval = UIValues_5[_h];
+                        for (var _j = 0, UIValues_6 = UIValues; _j < UIValues_6.length; _j++) {
+                            var theval = UIValues_6[_j];
                             if (theval.uivID == THEEL.elID) {
                                 var i = 0;
-                                for (var _j = 0, _k = THEEL.elContent; _j < _k.length; _j++) {
-                                    var vv = _k[_j];
+                                for (var _k = 0, _l = THEEL.elContent; _k < _l.length; _k++) {
+                                    var vv = _l[_k];
                                     if (theval.uivValue == vv) {
                                         ell.selectedIndex = i;
                                         break;
@@ -529,12 +541,12 @@ var FormGen = /** @class */ (function () {
                 case "CHECKBOX":
                     {
                         var i = 0;
-                        for (var _l = 0, _m = THEEL.elContent; _l < _m.length; _l++) {
-                            var vv = _m[_l];
+                        for (var _m = 0, _o = THEEL.elContent; _m < _o.length; _m++) {
+                            var vv = _o[_m];
                             i += 1;
                             var el = (document.getElementById(THEEL.elID + "_" + i.toString()));
-                            for (var _o = 0, UIValues_6 = UIValues; _o < UIValues_6.length; _o++) {
-                                var theval = UIValues_6[_o];
+                            for (var _p = 0, UIValues_7 = UIValues; _p < UIValues_7.length; _p++) {
+                                var theval = UIValues_7[_p];
                                 if (theval.uivID == el.id) {
                                     if (theval.uivValue.toUpperCase() == "TRUE") {
                                         el.checked = true;
