@@ -1,7 +1,14 @@
 # FormGen
 Typescript Library to Use Data structures handed to it to interpret and create UI CRUD screens.
 
-Takes a simple ARRAY of elements in the form of UIElement and the name of the container object in which to place the results.
+```typescript
+constructor(DomElementID: string, UIElements: UIElement[],VersionString: string) {
+        ...
+}
+```
+
+Takes a simple ARRAY of elements in the form of UIElement and the name of the container object in which to place the results, along with the specific versionstring for the particular forms content.
+Versionstring gets handed back and forth between the class and the forms persisted values on saving and loading methods (see below for more details) 
 
 ## UIElement definition
 
@@ -115,6 +122,12 @@ class UIInteraction
         }
     }
 ```
+Sample JSON data output from a blank form built via the included HTML file, showing version information as well as each UIElement with its entered values...
+
+```json
+[{"uivID":"FORMVERSIONSTRING","uivValue":"Version 1"},{"uivID":"1","uivValue":""},{"uivID":"2","uivValue":""},{"uivID":"3_1","uivValue":"false"},{"uivID":"3_2","uivValue":"false"},{"uivID":"3_3","uivValue":"false"},{"uivID":"4","uivValue":"unset"},{"uivID":"5","uivValue":""},{"uivID":"5a","uivValue":""},{"uivID":"6_1","uivValue":"false"},{"uivID":"6_2","uivValue":"false"},{"uivID":"6_3","uivValue":"false"},{"uivID":"6_4","uivValue":"false"},{"uivID":"6_5","uivValue":"false"},{"uivID":"7","uivValue":""},{"uivID":"8","uivValue":""}]
+
+```
         
 - **GetFormDataAsString()** Essentially returns JSON.Stringify() of the **GetFormData()** method above.
 
@@ -215,7 +228,7 @@ If the class is defined as FG then
         ELEs.push(
             new UIElement("8","narrative","A Third Narrative is here",true,[],true,[],false,"",[16]));
         
-        var FG = new FormGen('FormGenBody',ELEs);
+        var FG = new FormGen('FormGenBody',ELEs,'Version 1');
 
         /// This is a stub routine to wire up the UIInteractions
         /// as I dont know how to have the class call into itself via the ONCLICK and ONCHANGE

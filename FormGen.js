@@ -1,8 +1,10 @@
 var FormGen = /** @class */ (function () {
-    function FormGen(DomElementID, UIElements) {
-        // DomElementID will be the container for all the inserted form content
+    function FormGen(DomElementID, UIElements, VersionString) {
         this.theUIInteractions = [];
         this.theVersionString = "";
+        // set the form version here
+        this.theVersionString = VersionString;
+        // DomElementID will be the container for all the inserted form content
         // save the containerID for further use elsewhere
         this.theContainer = DomElementID;
         // save the handed in UIElements for further processing later
@@ -563,6 +565,19 @@ var FormGen = /** @class */ (function () {
                     }
             }
         }
+    };
+    /**
+     * SetFormVersion
+     * versionstring: string
+     */
+    FormGen.prototype.SetFormVersion = function (versionstring) {
+        this.theVersionString = versionstring;
+    };
+    /**
+     * GetFormVersion
+     */
+    FormGen.prototype.GetFormVersion = function () {
+        return this.theVersionString + "";
     };
     /**
      * SetFormDataFromString
