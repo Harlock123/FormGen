@@ -5,7 +5,11 @@ class FormGen {
     private theUIElements: UIElement[];
     private theVersionString: string = "";
 
-    constructor(DomElementID: string, UIElements: UIElement[]) {
+    constructor(DomElementID: string, UIElements: UIElement[],VersionString: string) {
+        
+        // set the form version here
+        this.theVersionString = VersionString;
+        
         // DomElementID will be the container for all the inserted form content
 
         // save the containerID for further use elsewhere
@@ -741,6 +745,21 @@ class FormGen {
                     }
             }
         }
+    }
+
+    /**
+     * SetFormVersion
+     * versionstring: string
+     */
+    public SetFormVersion(versionstring: string) {
+        this.theVersionString = versionstring;
+    }
+
+    /**
+     * GetFormVersion
+     */
+    public GetFormVersion() {
+        return this.theVersionString + "";
     }
 
     /**
