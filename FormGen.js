@@ -27,7 +27,7 @@ var FormGen = /** @class */ (function () {
                     }
                     //innerhtml += '<div id="' + 'div_' + THEEL.elID + '" ' + VIS + STY + ' >';
                     innerhtml += '<tr id="' + 'div_' + THEEL.elID + '" ' + VIS + STY + ' >';
-                    innerhtml += '<td>';
+                    innerhtml += '<td width="50%">';
                     if (THEEL.elLabel.trim() != "") {
                         if (THEEL.elLabelBold)
                             innerhtml += "<b>" + THEEL.elLabel + "</b><br>";
@@ -35,7 +35,7 @@ var FormGen = /** @class */ (function () {
                             innerhtml += THEEL.elLabel + "<br>";
                     }
                     innerhtml += "</td>";
-                    innerhtml += "<td>";
+                    innerhtml += '<td width="50%">';
                     if (!Array.isArray(THEEL.elInteractions) || !THEEL.elInteractions.length) {
                         innerhtml += '<input type="text" name = "' + THEEL.elID +
                             '" id="' + THEEL.elID + '" ><br> ';
@@ -63,7 +63,7 @@ var FormGen = /** @class */ (function () {
                     }
                     //innerhtml += '<div id="' + 'div_' + THEEL.elID + '" ' + VIS + STY + ' >';
                     innerhtml += '<tr id="' + 'div_' + THEEL.elID + '" ' + VIS + STY + ' >';
-                    innerhtml += '<td>';
+                    innerhtml += '<td width="50%">';
                     if (THEEL.elLabel.trim() != "") {
                         if (THEEL.elLabelBold)
                             innerhtml += "<b>" + THEEL.elLabel + "</b><br>";
@@ -71,7 +71,7 @@ var FormGen = /** @class */ (function () {
                             innerhtml += THEEL.elLabel + "<br>";
                     }
                     innerhtml += "</td>";
-                    innerhtml += "<td>";
+                    innerhtml += '<td width="50%">';
                     if (!Array.isArray(THEEL.elInteractions) || !THEEL.elInteractions.length) {
                         innerhtml += '<input type="date" name = "' + THEEL.elID +
                             '" id="' + THEEL.elID + '" ><br> ';
@@ -99,7 +99,7 @@ var FormGen = /** @class */ (function () {
                     }
                     //innerhtml += '<div id="' + 'div_' + THEEL.elID + '" ' + VIS + STY + ' >';
                     innerhtml += '<tr id="' + 'div_' + THEEL.elID + '" ' + VIS + STY + ' >';
-                    innerhtml += '<td>';
+                    innerhtml += '<td width="50%">';
                     if (THEEL.elLabel.trim() != "") {
                         if (THEEL.elLabelBold)
                             innerhtml += "<b>" + THEEL.elLabel + "</b><br>";
@@ -107,7 +107,7 @@ var FormGen = /** @class */ (function () {
                             innerhtml += THEEL.elLabel + "<br>";
                     }
                     innerhtml += "</td>";
-                    innerhtml += "<td>";
+                    innerhtml += '<td width="50%">';
                     if (!Array.isArray(THEEL.elInteractions) || !THEEL.elInteractions.length) {
                         innerhtml += '<textarea rows="5" cols="40" name = "' + THEEL.elID + '" id="'
                             + THEEL.elID + '" ></textarea><br> ';
@@ -135,7 +135,7 @@ var FormGen = /** @class */ (function () {
                     }
                     //innerhtml += '<div id="' + 'div_' + THEEL.elID + '" ' + VIS + STY + ' >';
                     innerhtml += '<tr id="' + 'div_' + THEEL.elID + '" ' + VIS + STY + ' >';
-                    innerhtml += '<td>';
+                    innerhtml += '<td width="50%">';
                     if (THEEL.elLabel.trim() != "") {
                         if (THEEL.elLabelBold)
                             innerhtml += "<b>" + THEEL.elLabel + "</b><br>";
@@ -143,7 +143,7 @@ var FormGen = /** @class */ (function () {
                             innerhtml += THEEL.elLabel + "<br>";
                     }
                     innerhtml += "</td>";
-                    innerhtml += "<td>";
+                    innerhtml += '<td width="50%">';
                     var i = 0;
                     for (var _g = 0, _h = THEEL.elContent; _g < _h.length; _g++) {
                         var v = _h[_g];
@@ -180,7 +180,7 @@ var FormGen = /** @class */ (function () {
                     }
                     // innerhtml += '<div id="' + 'div_' + THEEL.elID + '" ' + VIS + STY + ' >';
                     innerhtml += '<tr id="' + 'div_' + THEEL.elID + '" ' + VIS + STY + ' >';
-                    innerhtml += '<td>';
+                    innerhtml += '<td width="50%">';
                     if (THEEL.elLabel.trim() != "") {
                         if (THEEL.elLabelBold)
                             innerhtml += "<b>" + THEEL.elLabel + "</b><br>";
@@ -188,7 +188,7 @@ var FormGen = /** @class */ (function () {
                             innerhtml += THEEL.elLabel + "<br>";
                     }
                     innerhtml += "</td>";
-                    innerhtml += "<td>";
+                    innerhtml += '<td width="50%">';
                     if (!Array.isArray(THEEL.elInteractions) || !THEEL.elInteractions.length) {
                         innerhtml += '<select name="' + THEEL.elID + '" id="' + THEEL.elID + '" >';
                     }
@@ -225,7 +225,7 @@ var FormGen = /** @class */ (function () {
                     }
                     // innerhtml += '<div id="' + 'div_' + THEEL.elID + '" ' + VIS + STY + ' >';
                     innerhtml += '<tr id="' + 'div_' + THEEL.elID + '" ' + VIS + STY + ' >';
-                    innerhtml += '<td>';
+                    innerhtml += '<td width="50%">';
                     if (THEEL.elLabel.trim() != "") {
                         if (THEEL.elLabelBold)
                             innerhtml += "<b>" + THEEL.elLabel + "</b><br>";
@@ -233,7 +233,7 @@ var FormGen = /** @class */ (function () {
                             innerhtml += THEEL.elLabel + "<br>";
                     }
                     innerhtml += "</td>";
-                    innerhtml += "<td>";
+                    innerhtml += '<td width="50%">';
                     var i = 0;
                     for (var _q = 0, _r = THEEL.elContent; _q < _r.length; _q++) {
                         var v = _r[_q];

@@ -43,7 +43,7 @@ class FormGen {
 
                     innerhtml += '<tr id="' + 'div_' + THEEL.elID + '" ' + VIS + STY + ' >';
 
-                    innerhtml += '<td>';
+                    innerhtml += '<td width="50%">';
 
                     if (THEEL.elLabel.trim() != "") {
 
@@ -55,7 +55,7 @@ class FormGen {
 
                     innerhtml += "</td>";
 
-                    innerhtml += "<td>";
+                    innerhtml += '<td width="50%">';
 
 
                     if (!Array.isArray(THEEL.elInteractions) || !THEEL.elInteractions.length) {
@@ -97,7 +97,7 @@ class FormGen {
 
                     innerhtml += '<tr id="' + 'div_' + THEEL.elID + '" ' + VIS + STY + ' >';
 
-                    innerhtml += '<td>';
+                    innerhtml += '<td width="50%">';
 
                     if (THEEL.elLabel.trim() != "") {
 
@@ -109,7 +109,7 @@ class FormGen {
 
                     innerhtml += "</td>";
 
-                    innerhtml += "<td>";
+                    innerhtml += '<td width="50%">';
 
                     if (!Array.isArray(THEEL.elInteractions) || !THEEL.elInteractions.length) {
                         innerhtml += '<input type="date" name = "' + THEEL.elID +
@@ -150,7 +150,7 @@ class FormGen {
 
                     innerhtml += '<tr id="' + 'div_' + THEEL.elID + '" ' + VIS + STY + ' >';
 
-                    innerhtml += '<td>';
+                    innerhtml += '<td width="50%">';
 
                     if (THEEL.elLabel.trim() != "") {
                         if (THEEL.elLabelBold)
@@ -161,7 +161,7 @@ class FormGen {
 
                     innerhtml += "</td>";
 
-                    innerhtml += "<td>";
+                    innerhtml += '<td width="50%">';
 
                     if (!Array.isArray(THEEL.elInteractions) || !THEEL.elInteractions.length) {
                         innerhtml += '<textarea rows="5" cols="40" name = "' + THEEL.elID + '" id="'
@@ -202,7 +202,7 @@ class FormGen {
 
                     innerhtml += '<tr id="' + 'div_' + THEEL.elID + '" ' + VIS + STY + ' >';
 
-                    innerhtml += '<td>';
+                    innerhtml += '<td width="50%">';
 
                     if (THEEL.elLabel.trim() != "") {
                         if (THEEL.elLabelBold)
@@ -213,7 +213,7 @@ class FormGen {
 
                     innerhtml += "</td>";
 
-                    innerhtml += "<td>";
+                    innerhtml += '<td width="50%">';
 
                     let i = 0;
                     for (let v of THEEL.elContent) {
@@ -261,7 +261,7 @@ class FormGen {
 
                     innerhtml += '<tr id="' + 'div_' + THEEL.elID + '" ' + VIS + STY + ' >';
 
-                    innerhtml += '<td>';
+                    innerhtml += '<td width="50%">';
 
                     if (THEEL.elLabel.trim() != "") {
                         if (THEEL.elLabelBold)
@@ -272,7 +272,7 @@ class FormGen {
 
                     innerhtml += "</td>";
 
-                    innerhtml += "<td>";
+                    innerhtml += '<td width="50%">';
 
                     if (!Array.isArray(THEEL.elInteractions) || !THEEL.elInteractions.length) {
                         innerhtml += '<select name="' + THEEL.elID + '" id="' + THEEL.elID + '" >';
@@ -321,7 +321,7 @@ class FormGen {
 
                     innerhtml += '<tr id="' + 'div_' + THEEL.elID + '" ' + VIS + STY + ' >';
 
-                    innerhtml += '<td>';
+                    innerhtml += '<td width="50%">';
 
                     if (THEEL.elLabel.trim() != "") {
                         if (THEEL.elLabelBold)
@@ -332,7 +332,7 @@ class FormGen {
 
                     innerhtml += "</td>";
 
-                    innerhtml += "<td>";
+                    innerhtml += '<td width="50%">';
 
                     let i = 0;
                     for (let v of THEEL.elContent) {
