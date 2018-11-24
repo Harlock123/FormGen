@@ -152,7 +152,8 @@ If the class is defined as FG then
         {
             FG.DoFormGenInteraction(e);
         }
- be somewhere in the base javascript to wire up the UIInteractions..
+ 
+    be somewhere in the base javascript to wire up the UIInteractions..
  TODO: find a cleaner way to do this
  
 - **SetFormVersion(versionstring: string)** Will take versionstring and apply it to the classes internal versioning mechanisim. Echoing this back on **GetFormData** and **GetFormDataAsString**
