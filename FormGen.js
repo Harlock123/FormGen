@@ -7,10 +7,343 @@ var FormGen = /** @class */ (function () {
         // DomElementID will be the container for all the inserted form content
         // save the containerID for further use elsewhere
         this.theContainer = DomElementID;
+        this.HydrateForm(UIElements);
+        // // save the handed in UIElements for further processing later
+        // this.theUIElements = UIElements;
+        // // get the actual html element where we will put all this stuff
+        // var el = document.getElementById(DomElementID);
+        // var innerhtml = '<form> <table style="width: 100%;"> ';
+        // // iterate over all the defined elements and parse them and insert them into the dom
+        // for (let THEEL of UIElements) {
+        //     switch (THEEL.elType.toUpperCase()) {
+        //         case "TEXT": {
+        //             var STY = "";
+        //             if (THEEL.elStyle != "") {
+        //                 STY = ' style="' + THEEL.elStyle + '" ';
+        //             }
+        //             var VIS = "";//'style="display:block"';
+        //             if (!THEEL.elInitialVisibility) {
+        //                 VIS = 'style="display:none"';
+        //             }
+        //             //innerhtml += '<div id="' + 'div_' + THEEL.elID + '" ' + VIS + STY + ' >';
+        //             innerhtml += '<tr id="' + 'div_' + THEEL.elID + '" ' + VIS + STY + ' >';
+        //             innerhtml += '<td width="50%">';
+        //             if (THEEL.elLabel.trim() != "") {
+        //                 if (THEEL.elLabelBold)
+        //                     innerhtml += "<b>" + THEEL.elLabel + "</b><br>";
+        //                 else
+        //                     innerhtml += THEEL.elLabel + "<br>";
+        //             }
+        //             innerhtml += "</td>";
+        //             innerhtml += '<td width="50%">';
+        //             if (!Array.isArray(THEEL.elInteractions) || !THEEL.elInteractions.length) {
+        //                 innerhtml += '<input type="text" name = "' + THEEL.elID +
+        //                     '" id="' + THEEL.elID + '" ><br> ';
+        //             }
+        //             else {
+        //                 for (let v of THEEL.elInteractions) {
+        //                     this.theUIInteractions.push(v);
+        //                 }
+        //                 innerhtml += '<input type="text" name = "' + THEEL.elID +
+        //                     '" id="' + THEEL.elID + '" onchange="DoFormGenInteraction(this)" ><br> ';
+        //             }
+        //             innerhtml += '</td></tr>';
+        //             //innerhtml += '</div> ';
+        //             break;
+        //         }
+        //         case "DATE": {
+        //             var STY = "";
+        //             if (THEEL.elStyle != "") {
+        //                 STY = ' style="' + THEEL.elStyle + '" ';
+        //             }
+        //             var VIS = "";//'style="display:block"';
+        //             if (!THEEL.elInitialVisibility) {
+        //                 VIS = 'style="display:none"';
+        //             }
+        //             //innerhtml += '<div id="' + 'div_' + THEEL.elID + '" ' + VIS + STY + ' >';
+        //             innerhtml += '<tr id="' + 'div_' + THEEL.elID + '" ' + VIS + STY + ' >';
+        //             innerhtml += '<td width="50%">';
+        //             if (THEEL.elLabel.trim() != "") {
+        //                 if (THEEL.elLabelBold)
+        //                     innerhtml += "<b>" + THEEL.elLabel + "</b><br>";
+        //                 else
+        //                     innerhtml += THEEL.elLabel + "<br>";
+        //             }
+        //             innerhtml += "</td>";
+        //             innerhtml += '<td width="50%">';
+        //             if (!Array.isArray(THEEL.elInteractions) || !THEEL.elInteractions.length) {
+        //                 innerhtml += '<input type="date" name = "' + THEEL.elID +
+        //                     '" id="' + THEEL.elID + '" ><br> ';
+        //             }
+        //             else {
+        //                 for (let v of THEEL.elInteractions) {
+        //                     this.theUIInteractions.push(v);
+        //                 }
+        //                 innerhtml += '<input type="date" name = "' + THEEL.elID +
+        //                     '" id="' + THEEL.elID + '" onchange="DoFormGenInteraction(this)" ><br> ';
+        //             }
+        //             innerhtml += '</td></tr>';
+        //             //innerhtml += '</div> ';
+        //             break;
+        //         }
+        //         case "NARRATIVE": {
+        //             var STY = "";
+        //             if (THEEL.elStyle != "") {
+        //                 STY = ' style="' + THEEL.elStyle + '" ';
+        //             }
+        //             var VIS = "";//'style="display:block"';
+        //             if (!THEEL.elInitialVisibility) {
+        //                 VIS = 'style="display:none"';
+        //             }
+        //             //innerhtml += '<div id="' + 'div_' + THEEL.elID + '" ' + VIS + STY + ' >';
+        //             innerhtml += '<tr id="' + 'div_' + THEEL.elID + '" ' + VIS + STY + ' >';
+        //             innerhtml += '<td width="50%">';
+        //             if (THEEL.elLabel.trim() != "") {
+        //                 if (THEEL.elLabelBold)
+        //                     innerhtml += "<b>" + THEEL.elLabel + "</b><br>";
+        //                 else
+        //                     innerhtml += THEEL.elLabel + "<br>";
+        //             }
+        //             innerhtml += "</td>";
+        //             innerhtml += '<td width="50%">';
+        //             if (!Array.isArray(THEEL.elInteractions) || !THEEL.elInteractions.length) {
+        //                 innerhtml += '<textarea rows="5" cols="40" name = "' + THEEL.elID + '" id="'
+        //                     + THEEL.elID + '" ></textarea><br> ';
+        //             }
+        //             else {
+        //                 for (let v of THEEL.elInteractions) {
+        //                     this.theUIInteractions.push(v);
+        //                 }
+        //                 innerhtml += '<textarea rows="5" cols="40" name = "' + THEEL.elID + '" id="'
+        //                     + THEEL.elID + '" onchange="DoFormGenInteraction(this)" ></textarea><br> ';
+        //             }
+        //             innerhtml += '</td></tr>';
+        //             //innerhtml += '</div> ';
+        //             break;
+        //         }
+        //         case "RADIO": {
+        //             var STY = "";
+        //             if (THEEL.elStyle != "") {
+        //                 STY = ' style="' + THEEL.elStyle + '" ';
+        //             }
+        //             var VIS = "";//'style="display:block"';
+        //             if (!THEEL.elInitialVisibility) {
+        //                 VIS = 'style="display:none"';
+        //             }
+        //             //innerhtml += '<div id="' + 'div_' + THEEL.elID + '" ' + VIS + STY + ' >';
+        //             innerhtml += '<tr id="' + 'div_' + THEEL.elID + '" ' + VIS + STY + ' >';
+        //             innerhtml += '<td width="50%">';
+        //             if (THEEL.elLabel.trim() != "") {
+        //                 if (THEEL.elLabelBold)
+        //                     innerhtml += "<b>" + THEEL.elLabel + "</b><br>";
+        //                 else
+        //                     innerhtml += THEEL.elLabel + "<br>";
+        //             }
+        //             innerhtml += "</td>";
+        //             innerhtml += '<td width="50%">';
+        //             let i = 0;
+        //             for (let v of THEEL.elContent) {
+        //                 i += 1;
+        //                 if (!Array.isArray(THEEL.elInteractions) || !THEEL.elInteractions.length) {
+        //                     innerhtml += '<input type="radio" ' +
+        //                         'name = "' + THEEL.elID + '" id="' +
+        //                         THEEL.elID + '_' + i.toString() + '" ' +
+        //                         'value="' + v + '" >' + v + '<br> ';
+        //                 }
+        //                 else {
+        //                     for (let v of THEEL.elInteractions) {
+        //                         this.theUIInteractions.push(v);
+        //                     }
+        //                     innerhtml += '<input type="radio" ' +
+        //                         'name = "' + THEEL.elID + '" id="' +
+        //                         THEEL.elID + '_' + i.toString() + '" ' +
+        //                         'value="' + v + '" onchange="DoFormGenInteraction(this)" >' + v + '<br> ';
+        //                 }
+        //             }
+        //             innerhtml += '</td></tr>';
+        //             //innerhtml += '</div> ';
+        //             break;
+        //         }
+        //         case "DROPDOWN": {
+        //             var STY = "";
+        //             if (THEEL.elStyle != "") {
+        //                 STY = ' style="' + THEEL.elStyle + '" ';
+        //             }
+        //             var VIS = "";//'style="display:block"';
+        //             if (!THEEL.elInitialVisibility) {
+        //                 VIS = 'style="display:none"';
+        //             }
+        //             // innerhtml += '<div id="' + 'div_' + THEEL.elID + '" ' + VIS + STY + ' >';
+        //             innerhtml += '<tr id="' + 'div_' + THEEL.elID + '" ' + VIS + STY + ' >';
+        //             innerhtml += '<td width="50%">';
+        //             if (THEEL.elLabel.trim() != "") {
+        //                 if (THEEL.elLabelBold)
+        //                     innerhtml += "<b>" + THEEL.elLabel + "</b><br>";
+        //                 else
+        //                     innerhtml += THEEL.elLabel + "<br>";
+        //             }
+        //             innerhtml += "</td>";
+        //             innerhtml += '<td width="50%">';
+        //             if (!Array.isArray(THEEL.elInteractions) || !THEEL.elInteractions.length) {
+        //                 innerhtml += '<select name="' + THEEL.elID + '" id="' + THEEL.elID + '" >';
+        //             }
+        //             else {
+        //                 for (let v of THEEL.elInteractions) {
+        //                     this.theUIInteractions.push(v);
+        //                 }
+        //                 innerhtml += '<select name="' + THEEL.elID +
+        //                     '" id="' + THEEL.elID + '" onchange="DoFormGenInteraction(this)" >';
+        //             }
+        //             let i = 0;
+        //             for (let v of THEEL.elContent) {
+        //                 i += 1;
+        //                 innerhtml += '<option ' +
+        //                     'name = "' + THEEL.elID + '" id="' +
+        //                     THEEL.elID + '_' + i.toString() + '" ' +
+        //                     'value="' + v + '" >' + v + '</option> ';
+        //             }
+        //             innerhtml += '</select><br>';
+        //             innerhtml += '</td></tr>';
+        //             //innerhtml += '</div> ';
+        //             break;
+        //         }
+        //         case "CHECKBOX": {
+        //             var STY = "";
+        //             if (THEEL.elStyle != "") {
+        //                 STY = ' style="' + THEEL.elStyle + '" ';
+        //             }
+        //             var VIS = "";//'style="display:block"';
+        //             if (!THEEL.elInitialVisibility) {
+        //                 VIS = 'style="display:none"';
+        //             }
+        //             // innerhtml += '<div id="' + 'div_' + THEEL.elID + '" ' + VIS + STY + ' >';
+        //             innerhtml += '<tr id="' + 'div_' + THEEL.elID + '" ' + VIS + STY + ' >';
+        //             innerhtml += '<td width="50%">';
+        //             if (THEEL.elLabel.trim() != "") {
+        //                 if (THEEL.elLabelBold)
+        //                     innerhtml += "<b>" + THEEL.elLabel + "</b><br>";
+        //                 else
+        //                     innerhtml += THEEL.elLabel + "<br>";
+        //             }
+        //             innerhtml += "</td>";
+        //             innerhtml += '<td width="50%">';
+        //             let i = 0;
+        //             for (let v of THEEL.elContent) {
+        //                 i += 1;
+        //                 if (!Array.isArray(THEEL.elInteractions) || !THEEL.elInteractions.length) {
+        //                     innerhtml += '<input type="checkbox" ' +
+        //                         'name = "' + THEEL.elID + '" id="' +
+        //                         THEEL.elID + '_' + i.toString() + '" ' +
+        //                         'value="' + v + '" >' + v + '<br> ';
+        //                 }
+        //                 else {
+        //                     for (let v of THEEL.elInteractions) {
+        //                         this.theUIInteractions.push(v);
+        //                     }
+        //                     innerhtml += '<input type="checkbox" ' +
+        //                         'name = "' + THEEL.elID + '" id="' +
+        //                         THEEL.elID + '_' + i.toString() + '" ' +
+        //                         'value="' + v + '" onchange="DoFormGenInteraction(this)" >' + v + '<br> ';
+        //                 }
+        //             }
+        //             innerhtml += '</td></tr>';
+        //             //innerhtml += '</div> ';
+        //             break;
+        //         }
+        //     }
+        // }
+        // innerhtml += "</table></form>";
+        // el.innerHTML = innerhtml;
+        // // Ok now all of the elements should be in the DOM
+        // // now we want to iterate over everything again to set any scoring and any required bits
+        // for (let THEEL of UIElements) {
+        //     switch (THEEL.elType.toUpperCase()) {
+        //         case "TEXT": {
+        //             var el = <HTMLElement>(document.getElementById(THEEL.elID));
+        //             el.dataset.fgscore = THEEL.elScore[0].toString();
+        //             if (THEEL.elRequired) {
+        //                 el.dataset.fgrequired = "YES";
+        //             }
+        //             else {
+        //                 el.dataset.fgrequired = "NO";
+        //             }
+        //             break;
+        //         }
+        //         case "DATE": {
+        //             var el = <HTMLElement>(document.getElementById(THEEL.elID));
+        //             el.dataset.fgscore = THEEL.elScore[0].toString();
+        //             if (THEEL.elRequired) {
+        //                 el.dataset.fgrequired = "YES";
+        //             }
+        //             else {
+        //                 el.dataset.fgrequired = "NO";
+        //             }
+        //             break;
+        //         }
+        //         case "NARRATIVE": {
+        //             var el = <HTMLElement>(document.getElementById(THEEL.elID));
+        //             el.dataset.fgscore = THEEL.elScore[0].toString();
+        //             if (THEEL.elRequired) {
+        //                 el.dataset.fgrequired = "YES";
+        //             }
+        //             else {
+        //                 el.dataset.fgrequired = "NO";
+        //             }
+        //             break;
+        //         }
+        //         case "RADIO": {
+        //             let i = 0;
+        //             for (let v of THEEL.elScore) {
+        //                 i += 1;
+        //                 var el = <HTMLElement>(document.getElementById(THEEL.elID + '_' + i.toString()));
+        //                 el.dataset.fgscore = v.toString();
+        //                 if (THEEL.elRequired) {
+        //                     el.dataset.fgrequired = "YES";
+        //                 }
+        //                 else {
+        //                     el.dataset.fgrequired = "NO";
+        //                 }
+        //             }
+        //             break;
+        //         }
+        //         case "DROPDOWN": {
+        //             let i = 0;
+        //             for (let v of THEEL.elScore) {
+        //                 i += 1;
+        //                 var ell = <HTMLOptionElement>(document.getElementById(THEEL.elID + '_' + i.toString()));
+        //                 ell.dataset.fgscore = v.toString();
+        //                 if (THEEL.elRequired) {
+        //                     ell.dataset.fgrequired = "YES";
+        //                 }
+        //                 else {
+        //                     ell.dataset.fgrequired = "NO";
+        //                 }
+        //             }
+        //             break;
+        //         }
+        //         case "CHECKBOX": {
+        //             let i = 0;
+        //             for (let v of THEEL.elScore) {
+        //                 i += 1;
+        //                 var el = <HTMLElement>(document.getElementById(THEEL.elID + '_' + i.toString()));
+        //                 el.dataset.fgscore = v.toString();
+        //                 if (THEEL.elRequired) {
+        //                     el.dataset.fgrequired = "YES";
+        //                 }
+        //                 else {
+        //                     el.dataset.fgrequired = "NO";
+        //                 }
+        //             }
+        //             break;
+        //         }
+        //     }
+        // }
+    }
+    FormGen.prototype.HydrateForm = function (UIElements) {
         // save the handed in UIElements for further processing later
         this.theUIElements = UIElements;
         // get the actual html element where we will put all this stuff
-        var el = document.getElementById(DomElementID);
+        var el = document.getElementById(this.theContainer);
         var innerhtml = '<form> <table style="width: 100%;"> ';
         // iterate over all the defined elements and parse them and insert them into the dom
         for (var _i = 0, UIElements_1 = UIElements; _i < UIElements_1.length; _i++) {
@@ -351,7 +684,7 @@ var FormGen = /** @class */ (function () {
                 }
             }
         }
-    }
+    };
     /**
      * GetFormData
      */
@@ -440,6 +773,22 @@ var FormGen = /** @class */ (function () {
      */
     FormGen.prototype.GetFormDataAsString = function () {
         return JSON.stringify(this.GetFormData());
+    };
+    /**
+     * GetFormDefinitionFrom
+     * webUrl: string
+    */
+    FormGen.prototype.GetFormDefinitionFrom = function (webUrl) {
+        // Will attempt to populate the for by doung an HTTP GET from the webUrl
+        var Self = this;
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                Self.HydrateForm(JSON.parse(this.responseText));
+            }
+        };
+        xmlhttp.open('GET', webUrl);
+        xmlhttp.send();
     };
     /**
      * SetFormData

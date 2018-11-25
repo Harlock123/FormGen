@@ -33,8 +33,12 @@
                 id="btnScoreGet" value="Fetch Form Score">
 
         <input type="button" 
-                onclick="alert(' The Va;idity is: ' + FG.IsFormValid());" 
+                onclick="alert(' The Validity is: ' + FG.IsFormValid());" 
                 id="btnValidityGet" value="Fetch Form Validity">
+
+        <input type="button" 
+                onclick="FG.GetFormDefinitionFrom('http://localhost:8000/SampleForm.json');" 
+                id="btnPopulateFromURL" value="Form Definition from URL">
 
 
     </div>
@@ -70,6 +74,8 @@
         
         ELEs.push(
             new UIElement("8","narrative","A Third Narrative is here",true,[],true,[],false,"",[16]));
+        
+        var FFG = JSON.stringify(ELEs);
         
         var FG = new FormGen('FormGenBody',ELEs,'Version 1');
 
