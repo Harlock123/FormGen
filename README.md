@@ -294,6 +294,10 @@ If the class is defined as FG then
 </html>
 ```
 
+Sample form output from the HTML above.
+
+!(https://github.com/Harlock123/FormGen/blob/master/ScreenShots/SS1.png)
+
 **Some Other Notes**
 
 I did most of this development on a Linux System, as such I needed a simple webserver to be running on the folder where this project is housed. Most linux distros have a very serviceable webserver setup created in Python. From the terminal with the projects folder current simple issue the following command
