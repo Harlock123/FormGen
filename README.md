@@ -293,3 +293,15 @@ If the class is defined as FG then
 </body>
 </html>
 ```
+
+**Some Other Notes**
+
+I did most of this development on a Linux System, as such I needed a simple webserver to be running on the folder where this project is housed. Most linux distros have a very serviceable webserver setup created in Python. From the terminal with the projects folder current simple issue the following command
+
+```bash
+$ python -m SimpleHTTPServer
+```
+
+The default port should be 8000 which is why the sample HTML references localhost:8000 one on of the button click handlers
+
+
