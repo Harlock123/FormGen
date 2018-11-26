@@ -296,7 +296,7 @@ If the class is defined as FG then
 
 Sample form output from the HTML above.
 
-!(https://github.com/Harlock123/FormGen/blob/master/ScreenShots/SS1.png)
+![ScreenShot](ScreenShots/SS1.png)
 
 **Some Other Notes**
 
